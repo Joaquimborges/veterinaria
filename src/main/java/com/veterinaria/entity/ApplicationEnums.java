@@ -8,7 +8,7 @@ public class ApplicationEnums {
         ANIMAL_FAZENDA,
         ANIMAL_DOMESTICO_FAZENDA,
         ANIMAL_SELVAGEM,
-        TUTTI
+        TODOS
     }
 
     enum tipoAnimal
