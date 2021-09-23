@@ -51,12 +51,12 @@ public class MedicoPersistence {
 
     private boolean cpfOuCrNaoUtilizado(String cpf, Integer crm)
     {
-        boolean jaCadastrado
+        boolean naoCadastrado
                 =  listarMedicos().stream()
                 .filter(x-> x.getCpf().equals(cpf) || x.getNumeroRegistro().equals(crm))
                 .count() == 0;
 
-        return jaCadastrado;
+        return naoCadastrado;
     }
 
     /**
