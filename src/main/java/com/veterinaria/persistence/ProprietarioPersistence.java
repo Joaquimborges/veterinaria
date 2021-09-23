@@ -67,6 +67,39 @@ public class ProprietarioPersistence {
         return proprietarios;
     }
 
+    /**
+     * metodo percorre a listagem, compara os objetos,
+     * atualiza os dados e reescreve no arquivo.
+     */
+    public Proprietario altera(Proprietario proprietario){
+        mapearObjeto();
+        proprietarios = listarProprietarios();
+        for (int i = 0; i < proprietarios.size(); i++){
+            Proprietario p = proprietarios.get(i);
+            if (p.getCpf().equals(proprietario.getCpf())){
+                proprietarios.set(i, proprietario);
+                try {
+                    mapper.writeValue(new File("proprietarios.json"), proprietarios);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+                return proprietario;
+            }
+        }
+        return null;
+    }
+
+
+    public boolean remove(String cpf){
+        mapearObjeto();
+        listarProprietarios().removeIf(proprietario -> proprietario.getCpf().equals(cpf));
+        try {
+            mapper.writeValue(new File("proprietarios.json"), proprietarios);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return true;
+    }
 
 
 
