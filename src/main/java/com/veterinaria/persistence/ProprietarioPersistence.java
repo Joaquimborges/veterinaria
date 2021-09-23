@@ -25,7 +25,6 @@ public class ProprietarioPersistence {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-
     /**
      * metodo adiciona o objeto na lista
      * e salva em um arquivo json.
@@ -67,14 +66,6 @@ public class ProprietarioPersistence {
         }
         return proprietarios;
     }
-
-
-//    public Proprietario alterar(Proprietario proprietario){
-//        mapearObjeto();
-//
-//    }
-
-
 
 
 
