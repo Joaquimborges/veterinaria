@@ -20,4 +20,11 @@ public class Medico extends Pessoa {
         this.especialidade = especialidade;
     }
 
+    @Override
+    public String toString() {
+        return "Medico{" +
+                "numeroRegistro=" + numeroRegistro +
+                ", especialidade='" + especialidade + '\'' +
+                '}';
+    }
 }
