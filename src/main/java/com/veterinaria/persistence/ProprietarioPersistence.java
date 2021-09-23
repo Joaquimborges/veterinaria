@@ -25,14 +25,6 @@ public class ProprietarioPersistence {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-    private boolean cpfNaoUtilizado(String cpf){
-        for (Proprietario proprietario : listarProprietarios()){
-            if (proprietario.getCpf().equals(cpf)){
-                return false;
-            }
-        }
-        return true;
-    }
 
     /**
      * metodo adiciona o objeto na lista
@@ -40,7 +32,6 @@ public class ProprietarioPersistence {
      */
 
     public Proprietario cadastrar(Proprietario proprietario){
-        if (cpfNaoUtilizado(proprietario.getCpf())){
             mapearObjeto();
             proprietarios.add(proprietario);
             try {
@@ -48,7 +39,6 @@ public class ProprietarioPersistence {
             }catch (IOException e){
                 e.printStackTrace();
             }
-        }
         return proprietario;
     }
 
@@ -70,12 +60,19 @@ public class ProprietarioPersistence {
     public List<Proprietario> listarProprietarios(){
         mapearObjeto();
         try {
-            proprietarios = mapper.readValue(new File("proprietarios.json"), new TypeReference<List<Proprietario>>(){});
+            proprietarios = mapper.readValue(new File("proprietarios.json"), new TypeReference<>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
         return proprietarios;
     }
+
+
+//    public Proprietario alterar(Proprietario proprietario){
+//        mapearObjeto();
+//
+//    }
 
 
 
