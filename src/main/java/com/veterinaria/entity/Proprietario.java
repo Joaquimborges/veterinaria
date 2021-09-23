@@ -41,5 +41,7 @@ public class Proprietario extends Pessoa {
                 ", telefoneContato='" + telefoneContato + '\n' +
                 ", dataDeNascimento=" + dataDeNascimento +
                 "} ";
+      
     }
+  
 }
