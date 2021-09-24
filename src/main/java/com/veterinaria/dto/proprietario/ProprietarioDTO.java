@@ -24,6 +24,7 @@ public class ProprietarioDTO {
         this.endereco = endereco;
     }
 
+
     public static ProprietarioDTO converter(Proprietario proprietario){
         return new ProprietarioDTO(proprietario.getNome(), proprietario.getSobrenome(), proprietario.getEndereco());
     }
