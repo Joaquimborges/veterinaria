@@ -36,7 +36,7 @@ public class Proprietario extends Pessoa {
     @Override
     public String toString() {
         return "Proprietario{" +
-                "endereco='" + endereco + '\'' +
+                ", endereco='" + endereco + '\'' +
                 ", telefoneContato='" + telefoneContato + '\'' +
                 ", dataDeNascimento=" + dataDeNascimento +
                 '}';
