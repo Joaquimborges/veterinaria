@@ -54,8 +54,8 @@ public class MedicoPersistence {
         return medicos.stream()
                 .filter(m->m.getNumeroRegistro()
                         .equals(crvet))
-                            .findFirst()
-                                .orElse(null);
+                .findFirst()
+                .orElse(null);
 
     }
 
@@ -84,9 +84,9 @@ public class MedicoPersistence {
         Integer id;
 
         Optional<Medico> m = listarMedicos()
-                        .stream()
-                            .filter(x-> x.getNumeroRegistro().equals(medico.getNumeroRegistro()))
-                                .findFirst();
+                .stream()
+                .filter(x-> x.getNumeroRegistro().equals(medico.getNumeroRegistro()))
+                .findFirst();
 
         if (m == null) return null;
 
