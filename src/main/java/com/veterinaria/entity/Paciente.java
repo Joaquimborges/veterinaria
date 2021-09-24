@@ -24,33 +24,6 @@ public class Paciente {
         return numeroDoPaciente;
     }
 
-    public String getEspecie() {
-        return especie;
-    }
-
-    public String getCor() {
-        return cor;
-    }
-
-    public String getRaca() {
-        return raca;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public Paciente() {
-    }
-
     public Paciente(String especie, String cor, String raca, String nome, String sexo, LocalDate dataNascimento, Proprietario proprietario) {
         this.especie = especie;
         this.cor = cor;
