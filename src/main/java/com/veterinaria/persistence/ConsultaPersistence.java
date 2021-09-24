@@ -1,5 +1,7 @@
 package com.veterinaria.persistence;
 
+
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.veterinaria.entity.Consulta;
@@ -36,15 +38,24 @@ public class ConsultaPersistence {
             e.printStackTrace();
         }
         return consulta;
+    }
+
+
+    public List<Consulta> listar(){
+        mapearObjeto();
+        try {
+            agendaDeConsultas = mapper.readValue(new File("agendaDeConultas.json"), new TypeReference<>(){});
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return agendaDeConsultas;
 
         /*
              * metodo mapea o objeto e
              * localiza no arquivo de cadastro
          */
-
+  
     }
-
-
 
 
 
