@@ -1,24 +1,23 @@
 package com.veterinaria.persistence;
 
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.veterinaria.entity.Medico;
-import com.veterinaria.entity.Proprietario;
+import lombok.Setter;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Optional;
 
-
+@Setter
 public class MedicoPersistence {
 
-
     ObjectMapper mapper = new ObjectMapper();
-
-    //pra quê a lista? pegar os json da persistência e reescrever, né?
     private List<Medico> medicos = new ArrayList<>();
 
 
@@ -27,53 +26,18 @@ public class MedicoPersistence {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-
-    private boolean cpfNaoUtilizado(String cpf){
-
-        //iterar
-        for (Medico medico : listarMedicos()){
-            if (medico.getCpf().equals(cpf)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean crmNaoUtilizado(String crm){
-
-        //iterar
-        for (Medico medico : listarMedicos()){
-            if (medico.getCpf().equals(crm)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean cpfOuCrNaoUtilizado(String cpf, Integer crm)
-    {
-        boolean naoCadastrado
-                =  listarMedicos().stream()
-                .filter(x-> x.getCpf().equals(cpf) || x.getNumeroRegistro().equals(crm))
-                .count() == 0;
-
-        return naoCadastrado;
-    }
-
     /**
      * metodo adiciona o objeto na lista
      * e salva em um arquivo json.
      */
 
     public Medico cadastrar(Medico medico){
-        if (cpfOuCrNaoUtilizado(medico.getCpf(), medico.getNumeroRegistro())){
-            mapearObjeto();
-            medicos.add(medico);
-            try {
-                mapper.writeValue(new File("medicos.json"), medicos);
-            }catch (IOException e){
-                e.printStackTrace();
-            }
+        mapearObjeto();
+        medicos.add(medico);
+        try {
+            mapper.writeValue(new File("medicos.json"), medicos);
+        }catch (IOException e){
+            e.printStackTrace();
         }
         return medico;
     }
@@ -81,25 +45,19 @@ public class MedicoPersistence {
     /**
      * metodo mapea o objeto e
      * localiza no arquivo de cadastro
+     *
+     * Médico: String do Integer CRVET
      */
-//    public Medico obterUm(String cpf){
-//        mapearObjeto();
-//        medicos = listarMedicos();
-//        Optional<Medico> optionalMedico = medicos.stream()
-//                .filter(p -> p.getCpf().equals(cpf)).findFirst();
-//        return optionalMedico.orElse(null);
-//    }
-
-    public Medico obterUm(Integer numRegistro){
+    public Medico obterUm(Integer crvet){
         mapearObjeto();
-        medicos = listarMedicos();
-        Optional<Medico> optionalMedico = medicos.stream()
-                .filter(p -> p.getCpf().equals(numRegistro)).findFirst();
-        return optionalMedico.orElse(null);
+
+        return medicos.stream()
+                .filter(m->m.getNumeroRegistro()
+                        .equals(crvet))
+                            .findFirst()
+                                .orElse(null);
+
     }
-
-
-
 
     /**
      * metodo faz a leitura de todos os objetos da lista
@@ -107,27 +65,60 @@ public class MedicoPersistence {
     public List<Medico> listarMedicos(){
         mapearObjeto();
         try {
-            medicos = mapper.readValue(new File("medicos.json"), new TypeReference<List<Medico>>(){});
+            medicos = mapper.readValue(new File("medicos.json"), new TypeReference<>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
         return medicos;
     }
 
-    public Medico delete(Integer crm)
+    /**
+     * metodo percorre a listagem, compara os objetos,
+     * atualiza os dados e reescreve no arquivo.
+     */
+    public Medico altera(Medico medico)
     {
-        Medico m = obterUm(crm);
-        medicos.remove(m);
+        mapearObjeto();
+
+        Integer id;
+
+        Optional<Medico> m = listarMedicos()
+                        .stream()
+                            .filter(x-> x.getNumeroRegistro().equals(medico.getNumeroRegistro()))
+                                .findFirst();
+
+        if (m == null) return null;
+
+        id = listarMedicos().indexOf(m);
+
+        medicos.set(id, medico);
+
         try {
             mapper.writeValue(new File("medicos.json"), medicos);
         }catch (IOException e){
             e.printStackTrace();
         }
-
-        return m;
+        return medico;
 
     }
 
+
+    public boolean remove(Integer crvet){
+        mapearObjeto();
+        Boolean removeu = listarMedicos().removeIf(x -> x.getNumeroRegistro().equals(crvet));
+
+        if (removeu)
+        {
+            try {
+                mapper.writeValue(new File("proprietarios.json"), medicos);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        return removeu;
+    }
 
 
 
