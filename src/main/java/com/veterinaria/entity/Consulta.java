@@ -1,5 +1,6 @@
 package com.veterinaria.entity;
 
+import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -7,6 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+@Getter
 @Setter
 public class Consulta {
 
@@ -18,34 +20,6 @@ public class Consulta {
     private Paciente paciente;
     private Medico medicoVeterinario;
 
-    public String getMotivo() {
-        return motivo;
-    }
-
-    public String getDiagnosticoPossivel() {
-        return diagnosticoPossivel;
-    }
-
-    public String getTratamentoSeguido() {
-        return tratamentoSeguido;
-    }
-
-    public LocalDate getDataDia() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return dataDia;
-    }
-
-    public LocalTime getHora() {
-        return hora;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public Medico getMedico() {
-        return medicoVeterinario;
-    }
 
     public Consulta(String motivo, String diagnosticoPossivel, String tratamentoSeguido, LocalDate dataDia,
                     LocalTime hora, Paciente paciente, Medico medico) {
