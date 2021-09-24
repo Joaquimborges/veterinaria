@@ -1,61 +1,15 @@
 [ {
-  "motivo" : "infarte",
-  "diagnosticoPossivel" : "covid",
-  "tratamentoSeguido" : "vacina",
-  "dataDia" : [ 2021, 9, 24 ],
-  "hora" : [ 16, 2, 47, 428556000 ],
-  "paciente" : {
-    "numeroDoPaciente" : "5fc748e0-64ea-4b25-bc87-7b9b73c30572",
-    "especie" : "cachorro",
-    "cor" : "Branco",
-    "raca" : "Akita",
-    "nome" : "Tobirama",
-    "sexo" : "Macho",
-    "dataNascimento" : [ 2021, 2, 7 ],
-    "proprietario" : {
-      "nome" : "Matheus",
-      "sobrenome" : "Willock",
-      "cpf" : "fffgggkkkml",
-      "endereco" : "rua erotides",
-      "telefoneContato" : "34343434",
-      "dataDeNascimento" : [ 1997, 11, 7 ]
-    }
-  },
-  "medicoVeterinario" : {
-    "nome" : "José",
-    "sobrenome" : "Maria",
-    "cpf" : "gggggggggjh",
-    "numeroRegistro" : 10336,
-    "especialidade" : "cardio"
-  }
+  "nome" : "Pedro",
+  "sobrenome" : "Sousa",
+  "cpf" : "22233344455",
+  "endereco" : "rua 1",
+  "telefoneContato" : "1190884625",
+  "dataDeNascimento" : [ 1993, 9, 15 ]
 }, {
-  "motivo" : "infarte",
-  "diagnosticoPossivel" : "covid",
-  "tratamentoSeguido" : "vacina",
-  "dataDia" : [ 2021, 9, 24 ],
-  "hora" : [ 16, 2, 47, 428573000 ],
-  "paciente" : {
-    "numeroDoPaciente" : "370b9687-e81a-4a56-8914-0a4489d84553",
-    "especie" : "cachorro",
-    "cor" : "Branco",
-    "raca" : "Akita",
-    "nome" : "Tobirama",
-    "sexo" : "Macho",
-    "dataNascimento" : [ 2021, 2, 7 ],
-    "proprietario" : {
-      "nome" : "Matheus",
-      "sobrenome" : "Willock",
-      "cpf" : "fffgggkkkml",
-      "endereco" : "rua erotides",
-      "telefoneContato" : "34343434",
-      "dataDeNascimento" : [ 1997, 11, 7 ]
-    }
-  },
-  "medicoVeterinario" : {
-    "nome" : "José",
-    "sobrenome" : "Maria",
-    "cpf" : "gggggggggjh",
-    "numeroRegistro" : 10336,
-    "especialidade" : "cardio"
-  }
+  "nome" : "Hugo",
+  "sobrenome" : "Sousa",
+  "cpf" : "11224499001",
+  "endereco" : "rua 1",
+  "telefoneContato" : "1190884625",
+  "dataDeNascimento" : [ 1993, 9, 15 ]
 } ]
