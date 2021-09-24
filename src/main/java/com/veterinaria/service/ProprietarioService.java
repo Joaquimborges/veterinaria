@@ -19,10 +19,6 @@ public class ProprietarioService {
 
 
 
-public class ProprietarioService {
-
-    private final ProprietarioPersistence persistence = new ProprietarioPersistence();
-
 
     private boolean cpfNaoUtilizado(String cpf){
         for (Proprietario proprietario : persistence.listarProprietarios()){
@@ -32,6 +28,7 @@ public class ProprietarioService {
         }
         return true;
     }
+
 
 
     private boolean pacienteNaoExisteNaConsulta(String cpf){
