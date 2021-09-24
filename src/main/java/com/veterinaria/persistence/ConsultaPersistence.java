@@ -3,8 +3,6 @@ package com.veterinaria.persistence;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.veterinaria.entity.Consulta;
-import com.veterinaria.entity.Medico;
-import com.veterinaria.entity.Paciente;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +31,7 @@ public class ConsultaPersistence {
         agendaDeConsultas.add(consulta);
 
         try {
-            mapper.writeValue(new File("proprietarios.json"), agendaDeConsultas);
+            mapper.writeValue(new File("agendaDeConultas.json"), agendaDeConsultas);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -45,6 +43,8 @@ public class ConsultaPersistence {
          */
 
     }
+
+
 
 
 

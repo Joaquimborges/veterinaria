@@ -21,8 +21,7 @@ public class Consulta {
     private Medico medicoVeterinario;
 
 
-    public Consulta(String motivo, String diagnosticoPossivel, String tratamentoSeguido, LocalDate dataDia,
-                    LocalTime hora, Paciente paciente, Medico medico) {
+    public Consulta(String motivo, String diagnosticoPossivel, String tratamentoSeguido, LocalDate dataDia, LocalDate hora, Paciente paciente, Medico medico) {
         this.motivo = motivo;
         this.diagnosticoPossivel = diagnosticoPossivel;
         this.tratamentoSeguido = tratamentoSeguido;
