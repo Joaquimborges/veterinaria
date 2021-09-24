@@ -42,7 +42,7 @@ public class ProprietarioController {
         return ProprietarioDTO.converter(proprietario);
     }
 
-    @GetMapping(value = "/remover/{c}")
+    @DeleteMapping(value = "/remover/{c}")
     public boolean remover(@PathVariable("c") String cpf){
         return proprietarioService.apagar(cpf);
     }
