@@ -23,7 +23,7 @@ public abstract class Pessoa {
     @Override
     public String toString() {
         return "Pessoa{" +
-                "nome: '" + nome + '\n' +
+                ", nome: '" + nome + '\n' +
                 ", sobrenome: '" + sobrenome + '\n' +
                 ", cpf: '" + cpf + '\'' +
                 '}';
