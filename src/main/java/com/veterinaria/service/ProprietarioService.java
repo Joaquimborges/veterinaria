@@ -19,6 +19,7 @@ public class ProprietarioService {
 
 
 
+
     private boolean cpfNaoUtilizado(String cpf){
         for (Proprietario proprietario : persistence.listarProprietarios()){
             if (proprietario.getCpf().equals(cpf)){
