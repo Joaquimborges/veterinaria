@@ -1,6 +1,7 @@
 package com.veterinaria.service;
 
 
+
 import com.veterinaria.entity.Consulta;
 import com.veterinaria.entity.Proprietario;
 import com.veterinaria.persistence.ConsultaPersistence;
@@ -9,11 +10,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class ProprietarioService {
 
     private final ProprietarioPersistence persistence = new ProprietarioPersistence();
     private final ConsultaPersistence consultaPersistence = new ConsultaPersistence();
+
+
 
     private boolean cpfNaoUtilizado(String cpf){
         for (Proprietario proprietario : persistence.listarProprietarios()){
@@ -23,6 +27,8 @@ public class ProprietarioService {
         }
         return true;
     }
+
+
 
     private boolean pacienteNaoExisteNaConsulta(String cpf){
         for (Consulta consulta : consultaPersistence.listar()){
