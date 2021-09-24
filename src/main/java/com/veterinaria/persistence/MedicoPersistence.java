@@ -111,7 +111,7 @@ public class MedicoPersistence {
         if (removeu)
         {
             try {
-                mapper.writeValue(new File("proprietarios.json"), medicos);
+                mapper.writeValue(new File("medicos.json"), medicos);
             }catch (IOException e){
                 e.printStackTrace();
             }
