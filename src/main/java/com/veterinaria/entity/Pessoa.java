@@ -27,8 +27,8 @@ public abstract class Pessoa {
                 ", nome: '" + nome + '\n' +
                 ", sobrenome: '" + sobrenome + '\n' +
                 ", cpf: '" + cpf + '\'';
-      
+
     }
-  
-  
+
+
 }

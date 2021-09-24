@@ -36,12 +36,12 @@ public class Proprietario extends Pessoa {
     @Override
     public String toString() {
         return "Proprietario{" +
-                 super.toString() + '\n' +
+                super.toString() + '\n' +
                 ", endereco='" + endereco + '\n' +
                 ", telefoneContato='" + telefoneContato + '\n' +
                 ", dataDeNascimento=" + dataDeNascimento +
                 "} ";
-      
+
     }
-  
+
 }
