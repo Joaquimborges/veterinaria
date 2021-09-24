@@ -24,11 +24,12 @@ public class ProprietarioDTO {
         this.endereco = endereco;
     }
 
-    public static ProprietarioDTO converter(Proprietario proprietario){
+
+    public ProprietarioDTO converter(Proprietario proprietario){
         return new ProprietarioDTO(proprietario.getNome(), proprietario.getSobrenome(), proprietario.getEndereco());
     }
 
-    public static List<ProprietarioDTO> converteLista(List<Proprietario> proprietarios){
+    public List<ProprietarioDTO> converteLista(List<Proprietario> proprietarios){
         List<ProprietarioDTO> proprietarioDTOList = new ArrayList<>();
         for (Proprietario proprietario : proprietarios){
             proprietarioDTOList.add(new ProprietarioDTO(
