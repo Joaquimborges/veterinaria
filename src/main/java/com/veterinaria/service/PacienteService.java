@@ -1,48 +1,65 @@
 package com.veterinaria.service;
 
-
+import com.veterinaria.entity.Consulta;
 import com.veterinaria.entity.Paciente;
 import com.veterinaria.entity.Proprietario;
-import com.veterinaria.persistence.ProprietarioPersistence;
-import org.springframework.stereotype.Service;
+import com.veterinaria.persistence.ConsultaPersistence;
+import com.veterinaria.persistence.PacientePersistence;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
+import java.io.IOException;
+import java.util.Optional;
 
-@Service
-public class PacienteService {
+public class PacienteService
+{
 
-    private final PacientePersistence persistence = new PacientePersistence();
+    @Autowired
+    PacientePersistence pacientePersistence;
+    ConsultaPersistence consultaPersistence;
 
+    public Paciente cadastraPaciente (Paciente paciente)
+    {
 
+        if(paciente.getProprietario() != null)
+        {
 
-    public Paciente cadastrar (Paciente paciente){
-
-            try {
-                persistence.cadastrar(proprietario);
-                return proprietario;
-            }catch (RuntimeException e){
-                e.printStackTrace();
-            }
+                pacientePersistence.cadastrar(paciente);
+                return paciente;
+        }
 
         return null;
     }
 
+    public Paciente obterPaciente(String nome, String proprietarioCpf) {
 
-    public Proprietario getProprietario(String cpf){
-        return persistence.obterUm(cpf);
+        return pacientePersistence.obterPaciente(nome, proprietarioCpf);
+
     }
 
-
-    public List<Proprietario> Listar(){
-        return persistence.listarProprietarios();
-    }
-
-
-    public Proprietario altera(Proprietario proprietario){
-        if (proprietario != null){
-            return persistence.altera(proprietario);
+    public Paciente altera(Paciente paciente){
+        if (paciente.getProprietario() != null)
+        {
+           pacientePersistence.altera(paciente);
         }
         return null;
+    }
+
+    private boolean pacienteNaoExisteNaConsulta(String cpf){
+
+
+        for (Consulta consulta : consultaPersistence.listar()){
+            if (consulta.getPaciente().getProprietario().getCpf().equals(cpf)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean apagar(String nome, String cpf)
+    {
+        if (pacienteNaoExisteNaConsulta(cpf))
+            return pacientePersistence.remove(nome, cpf);
+                return false;
     }
 
 
