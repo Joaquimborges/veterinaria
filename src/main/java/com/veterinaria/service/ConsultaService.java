@@ -30,11 +30,12 @@ public class ConsultaService {
 
     public List<Consulta> consultasPaciente(String nomePaciente, String cpfProprietario){
         List<Consulta> consultas = consultaPersistence.listar();
-        consultas .stream()
-                  .filter(p -> p.getPaciente().getNome().equals(nomePaciente) &&
-                        p.getPaciente().getProprietario().getCpf().equals(cpfProprietario))
-                  .sorted(Comparator.comparing(p -> p.getPaciente().getProprietario().getNome()));
-
+        for (Consulta consulta : consultas){
+            if (consulta.getPaciente().getNome().equals(nomePaciente) &&
+                consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
+                consultas.sort(Comparator.comparing(consul -> consul.getPaciente().getProprietario().getNome()));
+            }
+        }
         return consultas;
 
     }
@@ -42,11 +43,12 @@ public class ConsultaService {
 
     public List<Consulta> listarConsultaPorData(String nomePaciente, String cpfProprietario){
         List<Consulta> consultas = consultaPersistence.listar();
-        consultas.stream()
-                .filter(p -> p.getPaciente().getNome().equals(nomePaciente) &&
-                        p.getPaciente().getProprietario().getCpf().equals(cpfProprietario))
-                .sorted(Comparator.comparing(Consulta::getDataDia).reversed());
-
+        for (Consulta consulta : consultas){
+            if (consulta.getPaciente().getNome().equals(nomePaciente) &&
+                consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
+                consultas.sort(Comparator.comparing(Consulta::getDataDia).reversed());
+            }
+        }
         return consultas;
     }
 
@@ -61,6 +63,17 @@ public class ConsultaService {
         return total;
     }
 
+
+    public List<Consulta> consultasMesmoDia(LocalDate data, String nomePaciente, String cpfProprietario){
+        List<Consulta> consultas = consultaPersistence.listar();
+        for (Consulta consulta : consultas){
+            if (consulta.getDataDia().equals(data) && consulta.getPaciente().getNome().equals(nomePaciente) &&
+                consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
+                consultas.sort(Comparator.comparing(Consulta::getDataDia));
+            }
+        }
+        return consultas;
+    }
 
 
 
