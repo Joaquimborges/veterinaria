@@ -7,9 +7,11 @@ import com.veterinaria.persistence.ConsultaPersistence;
 import com.veterinaria.persistence.MedicoPersistence;
 import com.veterinaria.persistence.ProprietarioPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MedicoService
 {
 
