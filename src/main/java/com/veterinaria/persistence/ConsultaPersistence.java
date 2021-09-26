@@ -54,6 +54,7 @@ public class ConsultaPersistence {
         }
         return agendaDeConsultas;
 
+
     }
 
     public Consulta alterar(Consulta consulta){
@@ -72,6 +73,7 @@ public class ConsultaPersistence {
             }
         }
         return null;
+
     }
 
 
