@@ -35,6 +35,29 @@ public class ConsultaService {
         return consultas;
     }
 
+    public List<Consulta> listarConsultaPorData(String nomePaciente, String cpfProprietario){
+        List<Consulta> consultas = consultaPersistence.listar();
+        consultas.stream()
+                .filter(p -> p.getPaciente().getNome().equals(nomePaciente) &&
+                        p.getPaciente().getProprietario().getCpf().equals(cpfProprietario))
+                .sorted(Comparator.comparing(Consulta::getDataDia).reversed());
+
+        return consultas;
+    }
+
+    public Integer totalConsultasMedico(Integer crm){
+        int total = 0;
+        List<Consulta> consultas = consultaPersistence.listar();
+        for (Consulta consulta : consultas){
+            if (consulta.getMedicoVeterinario().getNumeroRegistro().equals(crm)){
+                total++;
+            }
+        }
+        return total;
+    }
+
+
+
 
 
 }
