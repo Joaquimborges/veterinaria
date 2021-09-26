@@ -36,15 +36,15 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return "Paciente{" +
-                "numeroDoPaciente='" + numeroDoPaciente + '\'' +
-                ", especie='" + especie + '\'' +
-                ", cor='" + cor + '\'' +
-                ", raca='" + raca + '\'' +
-                ", nome='" + nome + '\'' +
-                ", sexo='" + sexo + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", proprietario=" + proprietario +
+        return "Paciente{" + '\n' +
+                ", numeroDoPaciente: '" + numeroDoPaciente + '\n' +
+                ", especie:'" + especie + '\n' +
+                ", cor: '" + cor + '\n' +
+                ", raca: '" + raca + '\n' +
+                ", nome: '" + nome + '\n' +
+                ", sexo: '" + sexo + '\n' +
+                ", dataNascimento: " + dataNascimento + '\n' +
+                ", proprietario: " + proprietario + '\'' +
                 '}';
     }
 
