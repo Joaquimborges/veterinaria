@@ -4,7 +4,9 @@ import com.veterinaria.entity.Consulta;
 import com.veterinaria.entity.Proprietario;
 import com.veterinaria.persistence.ConsultaPersistence;
 
+
 import java.time.LocalDate;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +36,9 @@ public class ConsultaService {
                   .sorted(Comparator.comparing(p -> p.getPaciente().getProprietario().getNome()));
 
         return consultas;
+
     }
+
 
     public List<Consulta> listarConsultaPorData(String nomePaciente, String cpfProprietario){
         List<Consulta> consultas = consultaPersistence.listar();
@@ -56,6 +60,9 @@ public class ConsultaService {
         }
         return total;
     }
+
+
+
 
 
     public List<Consulta> consultasMesmoDia(LocalDate data, String nomePaciente, String cpfProprietario){
