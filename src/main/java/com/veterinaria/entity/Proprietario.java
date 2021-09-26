@@ -34,7 +34,7 @@ public class Proprietario extends Pessoa {
                  super.toString() + '\n' +
                 ", endereco='" + endereco + '\n' +
                 ", telefoneContato='" + telefoneContato + '\n' +
-                ", dataDeNascimento=" + dataDeNascimento +
+                ", dataDeNascimento=" + dataDeNascimento + '\'' +
                 "} ";
       
     }

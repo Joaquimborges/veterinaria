@@ -54,6 +54,26 @@ public class ConsultaPersistence {
         }
         return agendaDeConsultas;
 
+
+    }
+
+    public Consulta alterar(Consulta consulta){
+        mapearObjeto();
+        agendaDeConsultas = listar();
+        for (int i =0; i < agendaDeConsultas.size(); i++){
+            Consulta consul = agendaDeConsultas.get(i);
+            if (consul.getPaciente().equals(consulta.getPaciente())){
+                agendaDeConsultas.set(i, consulta);
+                try {
+                    mapper.writeValue(new File("agendaDeConultas.json"), agendaDeConsultas);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+                return consulta;
+            }
+        }
+        return null;
+
     }
 
 
