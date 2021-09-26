@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
+
+import java.time.LocalDate;
+
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.List;
@@ -46,6 +49,7 @@ public class ConsultaService {
         }
 
         return null;
+
     }
 
 
@@ -82,6 +86,7 @@ public class ConsultaService {
         }
         return consultas;
     }
+
 
 
 
