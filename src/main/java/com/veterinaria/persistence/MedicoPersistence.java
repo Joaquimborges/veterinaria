@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.veterinaria.entity.Medico;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,8 +18,10 @@ import java.util.Optional;
 @Setter
 public class MedicoPersistence {
 
-    ObjectMapper mapper = new ObjectMapper();
-    private List<Medico> medicos = new ArrayList<>();
+    ObjectMapper mapper;
+
+    @Autowired
+    private List<Medico> medicos;
 
 
     private void mapearObjeto(){
