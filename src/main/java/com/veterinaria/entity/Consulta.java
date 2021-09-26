@@ -21,7 +21,7 @@ public class Consulta {
     private Medico medicoVeterinario;
 
 
-    public Consulta(String motivo, String diagnosticoPossivel, String tratamentoSeguido, LocalDate dataDia, LocalDate hora, Paciente paciente, Medico medico) {
+    public Consulta(String motivo, String diagnosticoPossivel, String tratamentoSeguido, LocalDate dataDia, LocalTime hora, Paciente paciente, Medico medico) {
         this.motivo = motivo;
         this.diagnosticoPossivel = diagnosticoPossivel;
         this.tratamentoSeguido = tratamentoSeguido;
@@ -33,14 +33,14 @@ public class Consulta {
 
     @Override
     public String toString() {
-        return "Consulta{" +
-                "Motivo='" + motivo + '\'' +
-                ", Diagnostico='" + diagnosticoPossivel + '\'' +
-                ", Tratamento a ser seguido='" + tratamentoSeguido + '\'' +
-                ", Data e hora de atendimento=" + dataDia +
-                ", Hora=" + hora +
-                ", Paciente=" + paciente +
-                ", Médico Veterinário=" + medicoVeterinario +
+        return "Consulta{" + '\n' +
+                ", Motivo: '" + motivo + '\n' +
+                ", Diagnostico: '" + diagnosticoPossivel + '\n' +
+                ", Tratamento a ser seguido: '" + tratamentoSeguido + '\n' +
+                ", Data e hora de atendimento: " + dataDia + '\n' +
+                ", Hora: " + hora + '\n' +
+                ", Paciente: " + paciente + '\n' +
+                ", Médico Veterinário: " + medicoVeterinario + '\'' +
                 '}';
     }
 }

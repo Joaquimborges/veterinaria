@@ -27,13 +27,14 @@ public class Proprietario extends Pessoa {
         this.dataDeNascimento = dataDeNascimento;
     }
 
+
     @Override
     public String toString() {
         return "Proprietario{" +
                  super.toString() + '\n' +
                 ", endereco='" + endereco + '\n' +
                 ", telefoneContato='" + telefoneContato + '\n' +
-                ", dataDeNascimento=" + dataDeNascimento +
+                ", dataDeNascimento=" + dataDeNascimento + '\'' +
                 "} ";
       
     }

@@ -22,9 +22,9 @@ public class Medico extends Pessoa {
 
     @Override
     public String toString() {
-        return "Medico{" +
-                "numeroRegistro=" + numeroRegistro +
-                ", especialidade='" + especialidade + '\'' +
+        return "Medico{" + '\n' +
+                ", numeroRegistro: " + numeroRegistro + '\n' +
+                ", especialidade: '" + especialidade + '\'' +
                 '}';
     }
 }

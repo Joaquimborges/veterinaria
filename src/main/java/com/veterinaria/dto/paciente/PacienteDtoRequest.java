@@ -1,14 +1,16 @@
-package com.veterinaria.entity;
+package com.veterinaria.dto.paciente;
 
+import com.veterinaria.entity.Paciente;
+import com.veterinaria.entity.Proprietario;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Setter
 @Getter
-public class Paciente {
+@Setter
+public class PacienteDtoRequest {
 
     private String numeroDoPaciente;
     private String especie;
@@ -24,7 +26,11 @@ public class Paciente {
         return numeroDoPaciente;
     }
 
-    public Paciente(String especie, String cor, String raca, String nome, String sexo, LocalDate dataNascimento, Proprietario proprietario) {
+    public PacienteDtoRequest() {
+    }
+
+    public PacienteDtoRequest(String numeroDoPaciente, String especie, String cor, String raca, String nome, String sexo, LocalDate dataNascimento, Proprietario proprietario) {
+        this.numeroDoPaciente = numeroDoPaciente;
         this.especie = especie;
         this.cor = cor;
         this.raca = raca;
@@ -34,18 +40,8 @@ public class Paciente {
         this.proprietario = proprietario;
     }
 
-    @Override
-    public String toString() {
-        return "Paciente{" + '\n' +
-                ", numeroDoPaciente: '" + numeroDoPaciente + '\n' +
-                ", especie:'" + especie + '\n' +
-                ", cor: '" + cor + '\n' +
-                ", raca: '" + raca + '\n' +
-                ", nome: '" + nome + '\n' +
-                ", sexo: '" + sexo + '\n' +
-                ", dataNascimento: " + dataNascimento + '\n' +
-                ", proprietario: " + proprietario + '\'' +
-                '}';
+    public Paciente converte(){
+        return new Paciente(especie, cor, raca, nome, sexo, dataNascimento, proprietario);
     }
 
 }
