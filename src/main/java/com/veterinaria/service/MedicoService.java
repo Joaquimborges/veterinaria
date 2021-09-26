@@ -1,27 +1,27 @@
 package com.veterinaria.service;
 
-import com.veterinaria.entity.Consulta;
 import com.veterinaria.entity.Medico;
-import com.veterinaria.entity.Proprietario;
 import com.veterinaria.persistence.ConsultaPersistence;
 import com.veterinaria.persistence.MedicoPersistence;
-import com.veterinaria.persistence.ProprietarioPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MedicoService
 {
 
 
-    private final MedicoPersistence persistence = new MedicoPersistence();
-    private final ConsultaPersistence consultaPersistence = new ConsultaPersistence();
+    @Autowired
+    MedicoPersistence medicoPersistence;
+    ConsultaPersistence consultaPersistence;
 
 
-    //valida cadastro médico por CRVET e CPF
+
     private boolean credenciaisNaoDuplicadas (Integer crvet, String cpf)
     {
-        return persistence.listarMedicos()
+        return medicoPersistence.listarMedicos()
                 .stream()
                 .filter(x-> x.getNumeroRegistro()
                         .equals(crvet) || x.getCpf()
@@ -35,13 +35,15 @@ public class MedicoService
 
        if(credenciaisNaoDuplicadas(crvet, cpf)) {
            try {
-               persistence.cadastrar(medico);
+               medicoPersistence.cadastrar(medico);
                return medico;
            } catch (RuntimeException e) {
                e.printStackTrace();
            }
 
        }
+
+
 
        else {
            throw new RuntimeException("Erro: CPF ou CRVET já em uso!");
@@ -50,17 +52,24 @@ public class MedicoService
 
     }
 
+    public Medico altera(Medico medico){
+        if (medico != null){
+            return medicoPersistence.altera(medico);
+        }
+        return null;
+    }
+
     public Medico getMedico(Integer crvet){
-        return persistence.obterUm(crvet);
+        return medicoPersistence.obterUm(crvet);
     }
 
     public List<Medico> Listar(){
-        return persistence.listarMedicos();
+        return medicoPersistence.listarMedicos();
     }
 
-    public boolean apagar(Integer crvet){
-        if (medicoNaoExisteNaConsulta(crvet)){
-            return persistence.remove(crvet);
+    public boolean apagar(String crvet){
+        if (medicoNaoExisteNaConsulta(Integer.valueOf(crvet))){
+            return medicoPersistence.remove(Integer.valueOf(crvet));
         }
         return false;
     }
