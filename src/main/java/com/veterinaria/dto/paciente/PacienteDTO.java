@@ -36,12 +36,12 @@ public class PacienteDTO {
         this.proprietario = proprietario;
     }
 
-    public PacienteDTO converter(Paciente paciente){
+    public static PacienteDTO converter(Paciente paciente){
         return new PacienteDTO(paciente.getNumeroDoPaciente(), paciente.getNome(),
                 paciente.getEspecie(), paciente.getSexo(), paciente.getDataNascimento(), paciente.getProprietario());
     }
 
-    public List<PacienteDTO> coverterLista(List<Paciente> pacienteList){
+    public static List<PacienteDTO> coverterLista(List<Paciente> pacienteList){
         List<PacienteDTO> pacienteDTOList = new ArrayList<>();
         for (Paciente paciente : pacienteList){
             pacienteDTOList.add(new PacienteDTO(paciente.getNumeroDoPaciente(), paciente.getNome(),
