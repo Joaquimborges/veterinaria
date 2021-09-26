@@ -27,6 +27,7 @@ public class Proprietario extends Pessoa {
         this.dataDeNascimento = dataDeNascimento;
     }
 
+
     @Override
     public String toString() {
         return "Proprietario{" +

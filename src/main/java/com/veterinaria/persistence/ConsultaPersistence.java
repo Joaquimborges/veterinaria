@@ -44,31 +44,15 @@ public class ConsultaPersistence {
 
 
 
-    public List<Consulta> listar(){
+    public List<Consulta> listar() {
         mapearObjeto();
         try {
-            agendaDeConsultas = mapper.readValue(new File("agendaDeConultas.json"), new TypeReference<>(){});
-        }catch (IOException e){
+            agendaDeConsultas = mapper.readValue(new File("agendaDeConultas.json"), new TypeReference<>() {
+            });
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return agendaDeConsultas;
-
-
-
-    public List<Consulta> listar(){
-        mapearObjeto();
-        try {
-            agendaDeConsultas = mapper.readValue(new File("agendaDeConultas.json"), new TypeReference<>(){});
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return agendaDeConsultas;
-
-        /*
-             * metodo mapea o objeto e
-             * localiza no arquivo de cadastro
-         */
-  
 
     }
 
