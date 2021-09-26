@@ -6,15 +6,18 @@ import com.veterinaria.entity.Proprietario;
 import com.veterinaria.persistence.ConsultaPersistence;
 import com.veterinaria.persistence.PacientePersistence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
+@Service
     public class PacienteService {
 
-        @Autowired
-        PacientePersistence pacientePersistence;
-        ConsultaPersistence consultaPersistence;
+        PacientePersistence pacientePersistence = new PacientePersistence();
+        ConsultaPersistence consultaPersistence = new ConsultaPersistence();
 
         public Paciente cadastraPaciente(Paciente paciente) {
 
@@ -55,6 +58,13 @@ import java.util.Optional;
             if (pacienteNaoExisteNaConsulta(cpf))
                 return pacientePersistence.remove(nome, cpf);
             return false;
+        }
+
+        public List<Paciente> listarPacientes(){
+         List<Paciente> pacientes =  pacientePersistence.listarPacientes();
+         pacientes.sort(Comparator.comparing(paciente -> paciente.getProprietario().getNome()));
+
+             return pacientes;
         }
 
 
