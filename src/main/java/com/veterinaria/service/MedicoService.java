@@ -32,29 +32,28 @@ public class MedicoService
 
 
     private Boolean medicoNaoExisteNaConsulta(Integer crvet) {
-       for (Consulta consulta : consultaPersistence.listar()){
-           if (consulta.getMedicoVeterinario().getNumeroRegistro().equals(crvet)){
-               return false;
-           }
-
-
-  
-
-
-  
-    public Medico cadastrar(Medico medico) {
-        if (credenciaisNaoDuplicadas(medico.getNumeroRegistro(), medico.getCpf())) {
-            try {
-                persistence.cadastrar(medico);
-                return medico;
-            } catch (RuntimeException e) {
-              e.printStackTrace();
+        for (Consulta consulta : consultaPersistence.listar()) {
+            if (consulta.getMedicoVeterinario().getNumeroRegistro().equals(crvet)) {
+                return false;
             }
-        } else {
-            throw new RuntimeException("CPF ou CRM já em uso");
         }
-        return null;
+        return true;
     }
+
+   public Medico cadastrar (Medico medico){
+       if (credenciaisNaoDuplicadas(medico.getNumeroRegistro(), medico.getCpf())) {
+           try {
+               persistence.cadastrar(medico);
+               return medico;
+           } catch (RuntimeException e) {
+               e.printStackTrace();
+           }
+       } else {
+           throw new RuntimeException("CPF ou CRM já em uso");
+       }
+       return null;
+   }
+
 
 
     public Medico getMedico(Integer crvet){
