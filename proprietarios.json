@@ -1,15 +1,8 @@
 [ {
-  "nome" : "Pedro",
-  "sobrenome" : "Sousa",
-  "cpf" : "22233344455",
-  "endereco" : "rua 1",
+  "nome" : "Joaquim",
+  "sobrenome" : "Borges",
+  "cpf" : "44488866623",
+  "endereco" : "rua 3",
   "telefoneContato" : "1190884625",
-  "dataDeNascimento" : [ 1993, 9, 15 ]
-}, {
-  "nome" : "Hugo",
-  "sobrenome" : "Sousa",
-  "cpf" : "11224499001",
-  "endereco" : "rua 1",
-  "telefoneContato" : "1190884625",
-  "dataDeNascimento" : [ 1993, 9, 15 ]
+  "dataDeNascimento" : [ 1993, 1, 13 ]
 } ]

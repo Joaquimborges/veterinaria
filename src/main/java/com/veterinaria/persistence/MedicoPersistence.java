@@ -80,34 +80,24 @@ public class MedicoPersistence {
     public Medico altera(Medico medico)
     {
         mapearObjeto();
-
-        Integer id;
-
-        Optional<Medico> m = listarMedicos()
-                .stream()
-                .filter(x-> x.getNumeroRegistro().equals(medico.getNumeroRegistro()))
-                .findFirst();
-
-        if (m == null) return null;
-
-        id = listarMedicos().indexOf(m);
-
-        medicos.set(id, medico);
-
-        try {
-            mapper.writeValue(new File("medicos.json"), medicos);
-        }catch (IOException e){
-            e.printStackTrace();
+        for (int i = 0; i < listarMedicos().size(); i++){
+            Medico medico1 = listarMedicos().get(i);
+            if (medico.getNumeroRegistro().equals(medico1.getNumeroRegistro())){
+                listarMedicos().set(i, medico);
+                try {
+                    mapper.writeValue(new File("medicos.json"), medicos);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
         }
         return medico;
-
     }
 
 
     public boolean remove(Integer crvet){
         mapearObjeto();
-        Boolean removeu = listarMedicos().removeIf(x -> x.getNumeroRegistro().equals(crvet));
-
+        boolean removeu = listarMedicos().removeIf(x -> x.getNumeroRegistro().equals(crvet));
         if (removeu)
         {
             try {
@@ -116,7 +106,6 @@ public class MedicoPersistence {
                 e.printStackTrace();
             }
         }
-
         return removeu;
     }
 

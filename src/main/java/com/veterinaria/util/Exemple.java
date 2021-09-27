@@ -5,6 +5,7 @@ import com.veterinaria.entity.Medico;
 import com.veterinaria.entity.Paciente;
 import com.veterinaria.entity.Proprietario;
 import com.veterinaria.service.ConsultaService;
+import com.veterinaria.service.MedicoService;
 import com.veterinaria.service.PacienteService;
 
 import java.time.LocalDate;
@@ -15,6 +16,8 @@ public class Exemple {
 
         ConsultaService cs = new ConsultaService();
         PacienteService ps = new PacienteService();
+        MedicoService ms = new MedicoService();
+
         LocalDate data = LocalDate.of(2021, 9, 25);
         LocalDate data2 = LocalDate.of(2021, 9, 20);
         LocalTime hora = LocalTime.of(10, 15);
@@ -46,19 +49,10 @@ public class Exemple {
         Consulta consulta3 = new Consulta("Dor de barriga", "Dor",
                 "cuidar mais", data2, hora,  paciente, medico);
 
-       // cs.agendarConsulta(consulta1);
-       // cs.agendarConsulta(consulta2);
-       // cs.agendarConsulta(consulta3);
 
-        System.out.println(cs.consultasPaciente("Tobirama", "11223344556"));
-       // System.out.println(cs.totalConsultasMedico(7711663));
 
-       // System.out.println(cs.consultasMesmoDia(data, "Tobirama", "11223344556"));
+       // System.out.println(cs.consultasPaciente("Tobirama", "11223344556"));
 
-//        ps.cadastraPaciente(paciente);
-//        ps.cadastraPaciente(paciente2);
-//        ps.cadastraPaciente(paciente3);
-//        ps.cadastraPaciente(paciente4);
-       // System.out.println(ps.listarPacientes());
+       // ms.cadastrar(medico);
     }
 }

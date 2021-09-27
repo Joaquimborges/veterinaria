@@ -35,27 +35,20 @@ public class ConsultaService {
 
 
     public List<Consulta> consultasPaciente(String nomePaciente, String cpfProprietario) {
-        try {
         List<Consulta> consultas = consultaPersistence.listar();
-        for (Consulta consulta : consultas) {
+        for (Consulta consulta : consultaPersistence.listar()) {
             if (consulta.getPaciente().getNome().equals(nomePaciente) &&
                     consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)) {
                 consultas.sort(Comparator.comparing(consul -> consul.getPaciente().getProprietario().getNome()));
             }
         }
             return consultas;
-     }catch (ConcurrentModificationException e){
-            e.fillInStackTrace();
-        }
-
-        return null;
-
     }
 
 
     public List<Consulta> listarConsultaPorData(String nomePaciente, String cpfProprietario){
         List<Consulta> consultas = consultaPersistence.listar();
-        for (Consulta consulta : consultas){
+        for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getPaciente().getNome().equals(nomePaciente) &&
                 consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
                 consultas.sort(Comparator.comparing(Consulta::getDataDia).reversed());
@@ -67,7 +60,7 @@ public class ConsultaService {
     public Integer totalConsultasMedico(Integer crm){
         int total = 0;
         List<Consulta> consultas = consultaPersistence.listar();
-        for (Consulta consulta : consultas){
+        for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getMedicoVeterinario().getNumeroRegistro().equals(crm)){
                 total++;
             }
@@ -78,7 +71,7 @@ public class ConsultaService {
 
     public List<Consulta> consultasMesmoDia(LocalDate data, String nomePaciente, String cpfProprietario){
         List<Consulta> consultas = consultaPersistence.listar();
-        for (Consulta consulta : consultas){
+        for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getDataDia().equals(data) && consulta.getPaciente().getNome().equals(nomePaciente) &&
                 consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
                 consultas.sort(Comparator.comparing(Consulta::getDataDia));

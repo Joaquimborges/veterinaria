@@ -3,6 +3,9 @@ package com.veterinaria.dto.medico;
 import com.veterinaria.entity.Medico;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 public class MedicoDTO {
 
@@ -21,7 +24,15 @@ public class MedicoDTO {
         this.especialidade = especialidade;
     }
 
-    public MedicoDTO converter(Medico medico){
+    public static MedicoDTO converter(Medico medico){
         return new MedicoDTO(medico.getNome(), medico.getSobrenome(), medico.getNumeroRegistro(), medico.getEspecialidade());
+    }
+
+    public static List<MedicoDTO> converterLista(List<Medico> medicos){
+        List<MedicoDTO> medicoDTOList = new ArrayList<>();
+        for (Medico medico : medicos){
+            medicoDTOList.add(new MedicoDTO(medico.getNome(), medico.getSobrenome(), medico.getNumeroRegistro(), medico.getEspecialidade()));
+        }
+        return medicoDTOList;
     }
 }

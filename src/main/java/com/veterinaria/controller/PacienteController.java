@@ -25,20 +25,20 @@ public class PacienteController {
     }
 
     @GetMapping("/obter/{nome}/{cpfProprietario}")
-    public PacienteDTO obter(@PathVariable String nome, @PathVariable String cpfProprietario){
+    public ResponseEntity<PacienteDTO> obter(@PathVariable String nome, @PathVariable String cpfProprietario){
         Paciente paciente = pacienteService.obterPaciente(nome, cpfProprietario);
-        return PacienteDTO.converter(paciente);
+        return new ResponseEntity<>(PacienteDTO.converter(paciente), HttpStatus.OK);
     }
 
     @PutMapping("/altera")
-    public PacienteDTO alterar(@RequestBody PacienteDtoRequest pacienteDtoRequest){
+    public ResponseEntity<PacienteDTO> alterar(@RequestBody PacienteDtoRequest pacienteDtoRequest){
         Paciente paciente = pacienteService.altera(pacienteDtoRequest.converte());
-        return PacienteDTO.converter(paciente);
+        return new ResponseEntity<>(PacienteDTO.converter(paciente), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/apagar/{nome}/{cpfProprietario}")
-    public boolean apagar(@PathVariable String nome, @PathVariable String cpfProprietario){
-        return pacienteService.apagar(nome, cpfProprietario);
+    public ResponseEntity<Boolean> apagar(@PathVariable String nome, @PathVariable String cpfProprietario){
+        return new ResponseEntity<>(pacienteService.apagar(nome, cpfProprietario), HttpStatus.OK);
     }
 
     @GetMapping("/listar")
