@@ -70,7 +70,8 @@ public class Validador {
 
         int soma_9prim = 0;
         int soma_10prim = 0;
-        int soma_11dig = 0;
+        int valPen = 0;
+        int valUlt = 0;
 
         String result = cpf;
         int[] vetorcpf;
@@ -88,30 +89,26 @@ public class Validador {
 
         //tratando o cpf
 
-        vetorcpf = result.chars().map(x -> x - '0').toArray();
 
-        int fact = 10;
-        for (int i = 0; i < 9; i++) {
-            soma_9prim += fact * vetorcpf[i];
-            fact--;
-        }
+        soma_9prim = Arrays.stream(result.subSequence(0, 9).chars().map(x -> x - '0').toArray()).sum();
+        soma_10prim = Arrays.stream(result.subSequence(0, 10).chars().map(x -> x - '0').toArray()).sum();
+        valPen = Integer.valueOf(result.substring(8,9));
+        valUlt = Integer.valueOf(result.substring(9,10));
 
 
-        if (vetorcpf[9] != ((soma_9prim * 10) / 11) % 10) {
+
+
+        if (valPen != ((soma_9prim * 10) / 11) % 10) {
             //throw cpf invalido
 
-            System.out.println("confira o final do seu cf: " + vetorcpf[9] + "  " + soma_9prim / 11 % 10);
+            System.out.println("confira o final do seu CPF!\n");
             return false;
         }
 
-        fact = 11;
-        for (int i = 0; i < 9; i++) {
-            soma_10prim += fact * vetorcpf[i];
-            fact--;
-        }
 
-        if (vetorcpf[10] != ((soma_10prim * 10) / 11) % 10) {
-            System.out.println("trocou o último dígito, né?" + vetorcpf[10] + "  " + soma_10prim / 11 % 10);
+
+        if (valUlt != ((soma_10prim * 10) / 11) % 10) {
+            System.out.println("trocou o último dígito, né?");
             return false;
         }
 
