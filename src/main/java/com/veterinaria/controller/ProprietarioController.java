@@ -25,9 +25,9 @@ public class ProprietarioController {
     }
 
     @GetMapping(value = "/obter/{c}")
-    public ProprietarioDTO get(@PathVariable("c") String cpf){
+    public ResponseEntity<ProprietarioDTO> get(@PathVariable("c") String cpf){
         Proprietario proprietario = proprietarioService.getProprietario(cpf);
-        return ProprietarioDTO.converter(proprietario);
+        return new ResponseEntity<>(ProprietarioDTO.converter(proprietario), HttpStatus.FOUND);
     }
 
     @GetMapping(value = "/listar")
@@ -37,15 +37,15 @@ public class ProprietarioController {
     }
 
     @PutMapping(value = "/editar")
-    public ProprietarioDTO editar(@RequestBody ProprietarioRequest proprietarioRequest){
+    public ResponseEntity<ProprietarioDTO> editar(@RequestBody ProprietarioRequest proprietarioRequest){
         Proprietario proprietario = proprietarioService.altera(proprietarioRequest.converte());
-        return ProprietarioDTO.converter(proprietario);
+        return new ResponseEntity<>(ProprietarioDTO.converter(proprietario), HttpStatus.ACCEPTED);
     }
 
 
     @DeleteMapping(value = "/remover/{c}")
-    public boolean remover(@PathVariable("c") String cpf){
-        return proprietarioService.apagar(cpf);
+    public ResponseEntity<Boolean> remover(@PathVariable("c") String cpf){
+        return new ResponseEntity<>(proprietarioService.apagar(cpf), HttpStatus.GONE) ;
     }
 
 }
