@@ -95,18 +95,17 @@ public class MedicoPersistence {
     }
 
 
-    public boolean remove(Integer crvet){
+    public Boolean remove(Integer crvet){
         mapearObjeto();
-        boolean removeu = listarMedicos().removeIf(x -> x.getNumeroRegistro().equals(crvet));
-        if (removeu)
-        {
-            try {
-                mapper.writeValue(new File("medico.json"), medicos);
-            }catch (IOException e){
-                e.printStackTrace();
-            }
+
+        listarMedicos().removeIf(medico -> medico.getNumeroRegistro().equals(crvet));
+        try {
+            mapper.writeValue(new File("medicos.json"), medicos);
+        }catch (IOException e){
+            e.printStackTrace();
         }
-        return removeu;
+        return true;
+
     }
 
 
