@@ -30,16 +30,18 @@ public class MedicoService
     }
   
 
+
     private Boolean medicoNaoExisteNaConsulta(Integer crvet) {
        for (Consulta consulta : consultaPersistence.listar()){
            if (consulta.getMedicoVeterinario().getNumeroRegistro().equals(crvet)){
                return false;
            }
-       }
-       return true;
-    }
+
+
   
 
+
+  
     public Medico cadastrar(Medico medico) {
         if (credenciaisNaoDuplicadas(medico.getNumeroRegistro(), medico.getCpf())) {
             try {
@@ -71,6 +73,7 @@ public class MedicoService
     }
 
       
+
     public Boolean apagar(Integer crvet){
         if (medicoNaoExisteNaConsulta(crvet)){
             return persistence.remove(crvet);
