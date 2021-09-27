@@ -28,18 +28,24 @@ public class MedicoService
                         .equals(crvet) || x.getCpf()
                         .equals(cpf));
     }
+  
 
     private boolean medicoNaoExisteNaConsulta(Integer crvet) {
 
         return consultaPersistence.listar()
                 .stream().noneMatch(x -> x.getMedicoVeterinario()
                         .getNumeroRegistro().equals(crvet));
-
     }
+  
 
     public Medico cadastrar(Medico medico)
     {
        if(credenciaisNaoDuplicadas(medico.getNumeroRegistro(), medico.getCpf())) {
+
+        Integer crvet = medico.getNumeroRegistro();
+        String cpf = medico.getCpf();
+
+       if(credenciaisNaoDuplicadas(crvet, cpf)) {
            try {
                persistence.cadastrar(medico);
                return medico;
@@ -58,14 +64,18 @@ public class MedicoService
         return persistence.obterUm(crvet);
     }
 
+      
     public List<Medico> Listar(){
         return persistence.listarMedicos();
     }
+      
+
 
     public Medico alterar(Medico medico){
         return persistence.altera(medico);
     }
 
+      
     public boolean apagar(Integer crvet){
         if (medicoNaoExisteNaConsulta(crvet)){
             return persistence.remove(crvet);

@@ -39,6 +39,7 @@ public class PacienteController {
     @DeleteMapping("/apagar/{nome}/{cpfProprietario}")
     public ResponseEntity<Boolean> apagar(@PathVariable String nome, @PathVariable String cpfProprietario){
         return new ResponseEntity<>(pacienteService.apagar(nome, cpfProprietario), HttpStatus.OK);
+
     }
 
     @GetMapping("/listar")
