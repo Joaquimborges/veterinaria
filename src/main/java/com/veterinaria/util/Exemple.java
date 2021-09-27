@@ -5,7 +5,9 @@ import com.veterinaria.entity.Medico;
 import com.veterinaria.entity.Paciente;
 import com.veterinaria.entity.Proprietario;
 import com.veterinaria.service.ConsultaService;
+
 import com.veterinaria.service.MedicoService;
+
 import com.veterinaria.service.PacienteService;
 
 import java.time.LocalDate;
@@ -17,6 +19,7 @@ public class Exemple {
         ConsultaService cs = new ConsultaService();
         PacienteService ps = new PacienteService();
         MedicoService ms = new MedicoService();
+
 
         LocalDate data = LocalDate.of(2021, 9, 25);
         LocalDate data2 = LocalDate.of(2021, 9, 20);
@@ -50,9 +53,5 @@ public class Exemple {
                 "cuidar mais", data2, hora,  paciente, medico);
 
 
-
-       // System.out.println(cs.consultasPaciente("Tobirama", "11223344556"));
-
-       // ms.cadastrar(medico);
     }
 }
