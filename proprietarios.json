@@ -1,3 +1,9 @@
-[ ]
-
+[ {
+  "nome" : "Joaquim",
+  "sobrenome" : "Borges",
+  "cpf" : "44488866623",
+  "endereco" : "rua 3",
+  "telefoneContato" : "1190884625",
+  "dataDeNascimento" : [ 1993, 1, 13 ]
+} ]
 
