@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Setter
 public class PacientePersistence {
+    final String arquivo = "pacientes.json";
 
     ObjectMapper mapper = new ObjectMapper();
     private List<Paciente> pacientes = new ArrayList<>();
@@ -27,9 +28,9 @@ public class PacientePersistence {
         mapearObjeto();
         pacientes.add(paciente);
         try {
-            mapper.writeValue(new File("pacientes.json"), pacientes);
+            mapper.writeValue(new File(arquivo), pacientes);
         }catch (IOException e){
-            System.out.println("Problema de Cadastro do Paciente!");
+            e.printStackTrace();
         }
         return paciente;
     }
@@ -48,7 +49,7 @@ public class PacientePersistence {
     public List<Paciente> listarPacientes(){
         mapearObjeto();
         try {
-            pacientes = mapper.readValue(new File("pacientes.json"), new TypeReference<>() {
+            pacientes = mapper.readValue(new File(arquivo), new TypeReference<>() {
             });
         }catch (IOException e){
             e.printStackTrace();
@@ -65,7 +66,7 @@ public class PacientePersistence {
                 pacientes.set(i, paciente);
 
                 try {
-                    mapper.writeValue(new File("pacientes.json"), pacientes);
+                    mapper.writeValue(new File(arquivo), pacientes);
                 }catch (IOException e){
                     e.printStackTrace();
                 }
@@ -84,7 +85,7 @@ public class PacientePersistence {
         );
 
         try{
-            mapper.writeValue(new File("pacientes.json"), pacientes);
+            mapper.writeValue(new File(arquivo), pacientes);
         }catch (IOException e){
             e.printStackTrace();
         }

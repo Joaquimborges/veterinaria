@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConsultaPersistence {
+    final String arquivo = "agendaDeConultas.json";
     ObjectMapper mapper = new ObjectMapper();
 
 
@@ -35,7 +36,7 @@ public class ConsultaPersistence {
         agendaDeConsultas.add(consulta);
 
         try {
-            mapper.writeValue(new File("agendaDeConultas.json"), agendaDeConsultas);
+            mapper.writeValue(new File(arquivo), agendaDeConsultas);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -47,7 +48,7 @@ public class ConsultaPersistence {
     public List<Consulta> listar() {
         mapearObjeto();
         try {
-            agendaDeConsultas = mapper.readValue(new File("agendaDeConultas.json"), new TypeReference<>() {
+            agendaDeConsultas = mapper.readValue(new File(arquivo), new TypeReference<>() {
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,7 +66,7 @@ public class ConsultaPersistence {
             if (consul.getPaciente().equals(consulta.getPaciente())){
                 agendaDeConsultas.set(i, consulta);
                 try {
-                    mapper.writeValue(new File("agendaDeConultas.json"), agendaDeConsultas);
+                    mapper.writeValue(new File(arquivo), agendaDeConsultas);
                 }catch (IOException e){
                     e.printStackTrace();
                 }

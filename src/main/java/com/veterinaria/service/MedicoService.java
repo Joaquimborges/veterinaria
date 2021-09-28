@@ -2,11 +2,8 @@ package com.veterinaria.service;
 
 import com.veterinaria.entity.Consulta;
 import com.veterinaria.entity.Medico;
-import com.veterinaria.entity.Proprietario;
 import com.veterinaria.persistence.ConsultaPersistence;
 import com.veterinaria.persistence.MedicoPersistence;
-import com.veterinaria.persistence.ProprietarioPersistence;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,7 +57,7 @@ public class MedicoService {
     }
 
       
-    public List<Medico> Listar(){
+    public List<Medico> listar(){
         return persistence.listarMedicos();
     }
 
@@ -72,7 +69,7 @@ public class MedicoService {
 
       
 
-    public Boolean apagar(Integer crvet){
+    public boolean apagar(Integer crvet){
         if (medicoNaoExisteNaConsulta(crvet)){
             return persistence.remove(crvet);
         }

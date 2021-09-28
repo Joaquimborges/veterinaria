@@ -12,10 +12,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Optional;
+
 
 @Setter
 public class MedicoPersistence {
+    final String arquivo = "medicos.json";
 
     ObjectMapper mapper = new ObjectMapper();
     private List<Medico> medicos = new ArrayList<>();
@@ -35,7 +36,7 @@ public class MedicoPersistence {
         mapearObjeto();
         medicos.add(medico);
         try {
-            mapper.writeValue(new File("medicos.json"), medicos);
+            mapper.writeValue(new File(arquivo), medicos);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -65,7 +66,7 @@ public class MedicoPersistence {
     public List<Medico> listarMedicos(){
         mapearObjeto();
         try {
-            medicos = mapper.readValue(new File("medicos.json"), new TypeReference<>() {
+            medicos = mapper.readValue(new File(arquivo), new TypeReference<>() {
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,7 +86,7 @@ public class MedicoPersistence {
             if (medico.getNumeroRegistro().equals(medico1.getNumeroRegistro())){
                 listarMedicos().set(i, medico);
                 try {
-                    mapper.writeValue(new File("medicos.json"), medicos);
+                    mapper.writeValue(new File(arquivo), medicos);
                 }catch (IOException e){
                     e.printStackTrace();
                 }
@@ -103,7 +104,7 @@ public class MedicoPersistence {
 
         listarMedicos().removeIf(medico -> medico.getNumeroRegistro().equals(crvet));
         try {
-            mapper.writeValue(new File("medicos.json"), medicos);
+            mapper.writeValue(new File(arquivo), medicos);
         }catch (IOException e){
             e.printStackTrace();
         }
