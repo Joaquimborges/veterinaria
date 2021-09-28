@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MedicoService
-{
+public class MedicoService {
 
 
     private final MedicoPersistence persistence = new MedicoPersistence();
@@ -21,8 +20,7 @@ public class MedicoService
 
 
     //valida cadastro médico por CRVET e CPF
-    private boolean credenciaisNaoDuplicadas (Integer crvet, String cpf)
-    {
+    private boolean credenciaisNaoDuplicadas(Integer crvet, String cpf) {
         return persistence.listarMedicos()
                 .stream().noneMatch(x -> x.getNumeroRegistro()
                         .equals(crvet) || x.getCpf()
@@ -30,15 +28,17 @@ public class MedicoService
     }
   
 
+
+
     private Boolean medicoNaoExisteNaConsulta(Integer crvet) {
-       for (Consulta consulta : consultaPersistence.listar()){
-           if (consulta.getMedicoVeterinario().getNumeroRegistro().equals(crvet)){
-               return false;
-           }
-       }
-       return true;
+        for (Consulta consulta : consultaPersistence.listar()) {
+            if (consulta.getMedicoVeterinario().getNumeroRegistro().equals(crvet)) {
+                return false;
+            }
+        }
+        return true;
     }
-  
+
 
     public Medico cadastrar(Medico medico) {
         if (credenciaisNaoDuplicadas(medico.getNumeroRegistro(), medico.getCpf())) {
@@ -46,7 +46,7 @@ public class MedicoService
                 persistence.cadastrar(medico);
                 return medico;
             } catch (RuntimeException e) {
-              e.printStackTrace();
+                e.printStackTrace();
             }
         } else {
             throw new RuntimeException("CPF ou CRM já em uso");
@@ -63,7 +63,7 @@ public class MedicoService
     public List<Medico> Listar(){
         return persistence.listarMedicos();
     }
-      
+
 
 
     public Medico alterar(Medico medico){
@@ -71,6 +71,7 @@ public class MedicoService
     }
 
       
+
     public Boolean apagar(Integer crvet){
         if (medicoNaoExisteNaConsulta(crvet)){
             return persistence.remove(crvet);
