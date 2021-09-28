@@ -1,2 +1,17 @@
-[ ]
-
+[ {
+  "numeroDoPaciente" : "aca7c147-3bc0-4bb6-8bc4-38d6c6343249",
+  "especie" : "cachorro",
+  "cor" : "Maron",
+  "raca" : "Liasa",
+  "nome" : "Ulli",
+  "sexo" : "Macho",
+  "dataNascimento" : [ 2021, 9, 25 ],
+  "proprietario" : {
+    "nome" : "Joaquim",
+    "sobrenome" : "Borges",
+    "cpf" : "44488866623",
+    "endereco" : "rua 3",
+    "telefoneContato" : "1190884625",
+    "dataDeNascimento" : [ 1993, 1, 13 ]
+  }
+} ]

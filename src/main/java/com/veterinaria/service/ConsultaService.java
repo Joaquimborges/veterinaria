@@ -81,7 +81,7 @@ public class ConsultaService {
         List<Consulta> consultas = consultaPersistence.listar();
         for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getDataDia().equals(data) && consulta.getPaciente().getNome().equals(nomePaciente) &&
-                consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
+                    consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
                 consultas.sort(Comparator.comparing(Consulta::getDataDia));
             }
         }
