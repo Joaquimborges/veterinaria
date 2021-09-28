@@ -32,7 +32,7 @@ public class ProprietarioController {
 
     @GetMapping(value = "/listar")
     public List<ProprietarioDTO> listar(){
-        List<Proprietario> proprietarios = proprietarioService.Listar();
+        List<Proprietario> proprietarios = proprietarioService.listar();
         return ProprietarioDTO.converteLista(proprietarios);
     }
 

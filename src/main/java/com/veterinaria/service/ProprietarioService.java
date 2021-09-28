@@ -61,7 +61,7 @@ public class ProprietarioService {
     }
 
 
-    public List<Proprietario> Listar(){
+    public List<Proprietario> listar(){
         return persistence.listarProprietarios();
     }
 

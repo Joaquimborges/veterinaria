@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
+
 
 @Getter
 @Setter
@@ -15,10 +15,7 @@ public class Proprietario extends Pessoa {
     private String telefoneContato;
     private LocalDate dataDeNascimento;
 
-    public LocalDate getDataDeNascimento() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return dataDeNascimento;
-    }
+
 
     public Proprietario(String nome, String sobrenome, String cpf, String endereco, String telefoneContato, LocalDate dataDeNascimento) {
         super(nome, sobrenome, cpf);
