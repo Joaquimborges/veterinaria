@@ -127,7 +127,7 @@ class ProprietarioServiceTest {
         ProprietarioService proprietarioService = new ProprietarioService();
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
-        proprietarioService.Listar();
+        proprietarioService.listar();
 
         //================================== Verifica através do assert, o que definirmos que queremos testar
         assertNotNull(proprietario);

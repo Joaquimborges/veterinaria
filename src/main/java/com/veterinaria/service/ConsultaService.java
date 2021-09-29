@@ -1,7 +1,6 @@
 package com.veterinaria.service;
 
 import com.veterinaria.entity.Consulta;
-import com.veterinaria.entity.Proprietario;
 import com.veterinaria.persistence.ConsultaPersistence;
 import org.springframework.stereotype.Service;
 
@@ -9,12 +8,11 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 
-import java.time.LocalDate;
-
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ConsultaService {
@@ -49,7 +47,7 @@ public class ConsultaService {
             e.fillInStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
 
     }
 
@@ -67,7 +65,6 @@ public class ConsultaService {
 
     public Integer totalConsultasMedico(Integer crm){
         int total = 0;
-        List<Consulta> consultas = consultaPersistence.listar();
         for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getMedicoVeterinario().getNumeroRegistro().equals(crm)){
                 total++;
@@ -81,17 +78,12 @@ public class ConsultaService {
         List<Consulta> consultas = consultaPersistence.listar();
         for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getDataDia().equals(data) && consulta.getPaciente().getNome().equals(nomePaciente) &&
-                consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
+                    consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
                 consultas.sort(Comparator.comparing(Consulta::getDataDia));
             }
         }
         return consultas;
     }
-
-
-
-
-
 
 
 

@@ -32,7 +32,7 @@ public class MedicoController {
 
     @GetMapping(value = "/listar")
     public List<MedicoDTO> listar(){
-        List<Medico> medicos = medicoService.Listar();
+        List<Medico> medicos = medicoService.listar();
         return MedicoDTO.converterLista(medicos);
     }
 

@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @Setter
 public class ProprietarioPersistence {
+    final String arquivo = "proprietarios.json";
 
     ObjectMapper mapper = new ObjectMapper();
     private List<Proprietario> proprietarios = new ArrayList<>();
@@ -34,7 +35,7 @@ public class ProprietarioPersistence {
             mapearObjeto();
             proprietarios.add(proprietario);
             try {
-                mapper.writeValue(new File("proprietarios.json"), proprietarios);
+                mapper.writeValue(new File(arquivo), proprietarios);
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -59,7 +60,7 @@ public class ProprietarioPersistence {
     public List<Proprietario> listarProprietarios(){
         mapearObjeto();
         try {
-            proprietarios = mapper.readValue(new File("proprietarios.json"), new TypeReference<>() {
+            proprietarios = mapper.readValue(new File(arquivo), new TypeReference<>() {
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,7 +80,7 @@ public class ProprietarioPersistence {
             if (p.getCpf().equals(proprietario.getCpf())){
                 proprietarios.set(i, proprietario);
                 try {
-                    mapper.writeValue(new File("proprietarios.json"), proprietarios);
+                    mapper.writeValue(new File(arquivo), proprietarios);
                 }catch (IOException e){
                     e.printStackTrace();
                 }
@@ -94,7 +95,7 @@ public class ProprietarioPersistence {
         mapearObjeto();
         listarProprietarios().removeIf(proprietario -> proprietario.getCpf().equals(cpf));
         try {
-            mapper.writeValue(new File("proprietarios.json"), proprietarios);
+            mapper.writeValue(new File(arquivo), proprietarios);
         }catch (IOException e){
             e.printStackTrace();
         }

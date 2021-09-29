@@ -12,7 +12,6 @@ import java.util.UUID;
 @Setter
 public class PacienteDtoRequest {
 
-    private String numeroDoPaciente;
     private String especie;
     private String cor;
     private String raca;
@@ -21,16 +20,12 @@ public class PacienteDtoRequest {
     private LocalDate dataNascimento;
     private Proprietario proprietario;
 
-    public String getNumeroDoPaciente() {
-        numeroDoPaciente = UUID.randomUUID().toString();
-        return numeroDoPaciente;
-    }
+
 
     public PacienteDtoRequest() {
     }
 
-    public PacienteDtoRequest(String numeroDoPaciente, String especie, String cor, String raca, String nome, String sexo, LocalDate dataNascimento, Proprietario proprietario) {
-        this.numeroDoPaciente = numeroDoPaciente;
+    public PacienteDtoRequest(String especie, String cor, String raca, String nome, String sexo, LocalDate dataNascimento, Proprietario proprietario) {
         this.especie = especie;
         this.cor = cor;
         this.raca = raca;

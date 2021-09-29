@@ -11,10 +11,10 @@ public abstract class Pessoa {
     private String sobrenome;
     private String cpf;
 
-    public Pessoa() {
+    protected Pessoa() {
     }
 
-    public Pessoa(String nome, String sobrenome, String cpf) {
+    protected Pessoa(String nome, String sobrenome, String cpf) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
