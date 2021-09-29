@@ -5,6 +5,7 @@ import com.veterinaria.entity.Paciente;
 import com.veterinaria.entity.Proprietario;
 import com.veterinaria.persistence.ConsultaPersistence;
 import com.veterinaria.persistence.PacientePersistence;
+import com.veterinaria.persistence.ProprietarioPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,11 @@ import java.util.Optional;
 
         PacientePersistence pacientePersistence = new PacientePersistence();
         ConsultaPersistence consultaPersistence = new ConsultaPersistence();
+        ProprietarioPersistence pp = new ProprietarioPersistence();
 
         public Paciente cadastraPaciente(Paciente paciente) {
 
-            if (paciente.getProprietario() != null) {
+            if (paciente.getProprietario() != null && !proprietarioNaoExiste(paciente.getProprietario().getCpf())) {
 
                 pacientePersistence.cadastrar(paciente);
                 return paciente;
@@ -30,7 +32,17 @@ import java.util.Optional;
             return null;
         }
 
-        public Paciente obterPaciente(String nome, String proprietarioCpf) {
+    private boolean proprietarioNaoExiste(String cpf) {
+       for (int i=0;i<pp.listarProprietarios().size();i++){
+           if(pp.listarProprietarios().get(i).getCpf().equals(cpf)){
+               return false;
+           }
+
+       }
+       return true;
+    }
+
+    public Paciente obterPaciente(String nome, String proprietarioCpf) {
 
             return pacientePersistence.obterPaciente(nome, proprietarioCpf);
 
