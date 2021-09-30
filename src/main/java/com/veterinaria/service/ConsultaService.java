@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.ConcurrentModificationException;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -58,19 +55,19 @@ public class ConsultaService {
 
 
     public List<Consulta> listarConsultaPorData(String nomePaciente, String cpfProprietario){
-        List<Consulta> consultas = consultaPersistence.listar();
+        List<Consulta> consultasDoPaciente = new ArrayList<>();
         boolean existeConsultaParaOrganizar = false;
-        for (Consulta consulta : consultas){
+        for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getPaciente().getNome().equals(nomePaciente) &&
                     consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)) {
                 existeConsultaParaOrganizar = true;
-                break;
+                consultasDoPaciente.add(consulta);
             }
         }
         if (existeConsultaParaOrganizar){
-            consultas.sort(Comparator.comparing(Consulta::getDataDia).reversed());
+            consultasDoPaciente.sort(Comparator.comparing(Consulta::getDataDia).reversed());
         }
-        return consultas;
+        return consultasDoPaciente;
     }
 
     public Integer totalConsultasMedico(Integer crm){
