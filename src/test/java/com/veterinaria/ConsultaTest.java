@@ -47,6 +47,7 @@ import java.util.List;
         consultaService.agendarConsulta(consulta2);
 
 
+
         assertNotNull(consulta.getPaciente());
 
     }
@@ -59,6 +60,7 @@ import java.util.List;
 
         ConsultaService consultaService = new ConsultaService(mock);
         consultaService.alterar(consulta2);
+
 
 
         assertEquals("alergia", consulta2.getMotivo());
