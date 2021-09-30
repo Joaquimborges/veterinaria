@@ -59,12 +59,16 @@ public class ConsultaService {
 
     public List<Consulta> listarConsultaPorData(String nomePaciente, String cpfProprietario){
         List<Consulta> consultas = consultaPersistence.listar();
+        boolean existeConsultaParaOrganizar = false;
         for (Consulta consulta : consultas){
             if (consulta.getPaciente().getNome().equals(nomePaciente) &&
-                consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
-
-                consultas.sort(Comparator.comparing(Consulta::getDataDia).reversed());
+                    consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)) {
+                existeConsultaParaOrganizar = true;
+                break;
             }
+        }
+        if (existeConsultaParaOrganizar){
+            consultas.sort(Comparator.comparing(Consulta::getDataDia).reversed());
         }
         return consultas;
     }
@@ -84,7 +88,7 @@ public class ConsultaService {
         List<Consulta> consultas = consultaPersistence.listar();
         for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getDataDia().equals(data) && consulta.getPaciente().getNome().equals(nomePaciente) &&
-                    consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
+                consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
                 consultas.sort(Comparator.comparing(Consulta::getDataDia));
             }
         }
