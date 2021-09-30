@@ -46,7 +46,7 @@ class ProprietarioServiceTest {
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
 
-        ProprietarioService proprietarioService = new ProprietarioService();
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
         proprietarioService.cadastrar(proprietario3);
@@ -65,7 +65,7 @@ class ProprietarioServiceTest {
 
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
-        ProprietarioService proprietarioService = new ProprietarioService();
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
         proprietarioService.cadastrar(proprietario);
@@ -85,7 +85,7 @@ class ProprietarioServiceTest {
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
 
-        ProprietarioService proprietarioService = new ProprietarioService();
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
@@ -103,7 +103,7 @@ class ProprietarioServiceTest {
         Mockito.when(mockProprietarioPersistence.altera(Mockito.any(Proprietario.class))).thenReturn(proprietario);
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
-        ProprietarioService proprietarioService = new ProprietarioService();
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
         proprietarioService.altera(proprietario);
@@ -124,7 +124,7 @@ class ProprietarioServiceTest {
 
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
-        ProprietarioService proprietarioService = new ProprietarioService();
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
         proprietarioService.listar();
@@ -142,7 +142,7 @@ class ProprietarioServiceTest {
 
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
-        ProprietarioService proprietarioService = new ProprietarioService();
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
         proprietarioService.apagar(proprietario.getCpf());

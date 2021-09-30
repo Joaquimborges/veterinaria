@@ -39,11 +39,12 @@ import java.util.List;
     @Test
    public void agendarUmaConsulta() {
         ConsultaPersistence mock = Mockito.mock(ConsultaPersistence.class);
-        ConsultaService mockServ = Mockito.mock(ConsultaService.class);
         Mockito.when(mock.cadastrarConsulta(Mockito.any(Consulta.class))).thenReturn(consulta);
         Mockito.when(mock.listar()).thenReturn(consultas);
-        Mockito.when(mockServ.agendarConsulta(consulta)).thenReturn(consulta);
-        Mockito.when(mockServ.agendarConsulta(consulta2)).thenReturn(consulta2);
+
+        ConsultaService consultaService = new ConsultaService(mock);
+        consultaService.agendarConsulta(consulta);
+        consultaService.agendarConsulta(consulta2);
 
 
         assertNotNull(consulta.getPaciente());
@@ -54,9 +55,10 @@ import java.util.List;
     @Test
    public void alterarOsDadosDeUmaConsulta() {
         ConsultaPersistence mock = Mockito.mock(ConsultaPersistence.class);
-        ConsultaService mockServ = Mockito.mock(ConsultaService.class);
         Mockito.when(mock.alterar(Mockito.any(Consulta.class))).thenReturn(consulta);
-        Mockito.when(mockServ.alterar(consulta2)).thenReturn(consulta2);
+
+        ConsultaService consultaService = new ConsultaService(mock);
+        consultaService.alterar(consulta2);
 
 
         assertEquals("alergia", consulta2.getMotivo());
