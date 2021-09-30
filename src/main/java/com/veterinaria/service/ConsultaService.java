@@ -19,6 +19,7 @@ public class ConsultaService {
 
     private final ConsultaPersistence consultaPersistence = new ConsultaPersistence();
 
+
     public Consulta agendarConsulta(Consulta consulta) {
         consultaPersistence.cadastrarConsulta(consulta);
         return consulta;
