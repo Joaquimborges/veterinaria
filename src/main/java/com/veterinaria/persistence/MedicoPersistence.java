@@ -107,6 +107,7 @@ public class MedicoPersistence {
             mapper.writeValue(new File(arquivo), medicos);
         }catch (IOException e){
             e.printStackTrace();
+            return false;
         }
         return true;
 
