@@ -82,9 +82,10 @@ import java.util.List;
         Mockito.when(mock.listar()).thenReturn(consultas);
 
         ConsultaService consultaService = new ConsultaService(mock);
-        consultaService.listarConsultaPorData(paciente.getNome(), proprietario.getCpf());
+        List<Consulta> consultaOrdenada = consultaService
+                .listarConsultaPorData(paciente.getNome(), proprietario.getCpf());
 
-        assertEquals("Vomito", consultas.get(0).getMotivo());
+        assertEquals("Vomito", consultaOrdenada.get(0).getMotivo());
     }
 
 
