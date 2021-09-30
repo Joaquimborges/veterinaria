@@ -19,9 +19,11 @@ public class ConsultaService {
 
     private final ConsultaPersistence consultaPersistence;
 
+
     public ConsultaService(ConsultaPersistence consultaPersistence){
         this.consultaPersistence = consultaPersistence;
     }
+
     public Consulta agendarConsulta(Consulta consulta) {
         consultaPersistence.cadastrarConsulta(consulta);
         return consulta;
@@ -87,5 +89,14 @@ public class ConsultaService {
         }
         return consultas;
     }
+
+
+
+
+
+
+
+
+
 
 }

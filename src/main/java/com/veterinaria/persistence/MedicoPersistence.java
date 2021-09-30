@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Component
 public class MedicoPersistence {
     final String arquivo = "medicos.json";

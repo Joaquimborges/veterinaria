@@ -71,7 +71,7 @@ class ProprietarioServiceTest {
         proprietarioService.cadastrar(proprietario);
 
         //================================== Verifica através do assert, o que definirmos que queremos testar
-        assertTrue(proprietario.getCpf().equals("11883344556"));
+        assertEquals("11883344556", proprietario.getCpf());
     }
 
     @Test
@@ -114,7 +114,7 @@ class ProprietarioServiceTest {
         String actualNome = proprietario.getNome();
 
         //================================== Verifica através do assert, o que definirmos que queremos testar
-        assertTrue(actualNome.equals(expectedNome));
+        assertEquals(actualNome, expectedNome);
     }
 
     @Test
