@@ -4,11 +4,10 @@ import com.veterinaria.entity.Consulta;
 import com.veterinaria.entity.Paciente;
 import com.veterinaria.persistence.ConsultaPersistence;
 import com.veterinaria.persistence.PacientePersistence;
-
 import com.veterinaria.persistence.ProprietarioPersistence;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.Comparator;
 import java.util.List;
@@ -17,9 +16,25 @@ import java.util.List;
 @Service
 public class PacienteService {
 
-    PacientePersistence pacientePersistence = new PacientePersistence();
-    ConsultaPersistence consultaPersistence = new ConsultaPersistence();
-    ProprietarioPersistence proprietarioPersistence = new ProprietarioPersistence();
+    PacientePersistence pacientePersistence;
+    ConsultaPersistence consultaPersistence;
+    ProprietarioPersistence proprietarioPersistence;
+
+    public PacienteService(PacientePersistence pacientePersistence){
+        this.pacientePersistence = pacientePersistence;
+    }
+    public PacienteService(ConsultaPersistence consultaPersistence){
+        this.consultaPersistence = consultaPersistence;
+    }
+    public PacienteService(ProprietarioPersistence proprietarioPersistence){
+        this.proprietarioPersistence = proprietarioPersistence;
+    }
+    @Autowired
+    public PacienteService(PacientePersistence pacientePersistence, ProprietarioPersistence proprietarioPersistence, ConsultaPersistence consultaPersistence){
+        this.pacientePersistence = pacientePersistence;
+        this.proprietarioPersistence = proprietarioPersistence;
+        this.consultaPersistence = consultaPersistence;
+    }
 
     public Paciente cadastraPaciente(Paciente paciente) {
 
