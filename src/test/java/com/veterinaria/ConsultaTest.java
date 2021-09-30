@@ -66,6 +66,19 @@ import java.util.List;
         assertEquals("alergia", consulta2.getMotivo());
     }
 
+    @Test
+   public void listarConsultasOrdenadaPelaDataDecrescente() {
+        consultas.add(consulta2);
+        consultas.add(consulta);
+        ConsultaPersistence mock = Mockito.mock(ConsultaPersistence.class);
+        Mockito.when(mock.listar()).thenReturn(consultas);
+
+        ConsultaService consultaService = new ConsultaService(mock);
+        consultaService.listarConsultaPorData(paciente.getNome(), proprietario.getCpf());
+
+        assertEquals("Vomito", consultas.get(0).getMotivo());
+    }
+
 
 
 
