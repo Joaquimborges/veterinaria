@@ -46,7 +46,7 @@ class ProprietarioServiceTest {
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
 
-        ProprietarioService proprietarioService = new ProprietarioService();
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
         proprietarioService.cadastrar(proprietario);
@@ -65,13 +65,13 @@ class ProprietarioServiceTest {
 
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
-        ProprietarioService proprietarioService = new ProprietarioService();
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
         proprietarioService.cadastrar(proprietario);
 
         //================================== Verifica através do assert, o que definirmos que queremos testar
-        assertTrue(proprietario.getCpf().equals("11883344556"));
+        assertEquals("11883344556", proprietario.getCpf());
     }
 
     @Test
@@ -85,7 +85,7 @@ class ProprietarioServiceTest {
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
 
-        ProprietarioService proprietarioService = new ProprietarioService();
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
@@ -103,7 +103,7 @@ class ProprietarioServiceTest {
         Mockito.when(mockProprietarioPersistence.altera(Mockito.any(Proprietario.class))).thenReturn(proprietario);
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
-        ProprietarioService proprietarioService = new ProprietarioService();
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
         proprietarioService.altera(proprietario);
@@ -114,7 +114,7 @@ class ProprietarioServiceTest {
         String actualNome = proprietario.getNome();
 
         //================================== Verifica através do assert, o que definirmos que queremos testar
-        assertTrue(actualNome.equals(expectedNome));
+        assertEquals(actualNome, expectedNome);
     }
 
     @Test
@@ -124,7 +124,7 @@ class ProprietarioServiceTest {
 
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
-        ProprietarioService proprietarioService = new ProprietarioService();
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
         proprietarioService.listar();
@@ -142,7 +142,7 @@ class ProprietarioServiceTest {
 
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
-        ProprietarioService proprietarioService = new ProprietarioService();
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
         proprietarioService.apagar(proprietario.getCpf());
