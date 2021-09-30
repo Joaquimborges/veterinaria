@@ -65,6 +65,7 @@ public class ProprietarioService {
         return persistence.obterUm(cpf);
     }
 
+
     public List<Proprietario> listar(){
         return persistence.listarProprietarios();
     }
