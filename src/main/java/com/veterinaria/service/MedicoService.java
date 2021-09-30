@@ -54,7 +54,13 @@ public class MedicoService {
     }
 
     public Medico alterar(Medico medico){
-        return persistence.altera(medico);
+//        return persistence.altera(medico);
+        if (medico != null){
+            return persistence.altera(medico);
+        }
+        return null;
+
+
     }
 
     public boolean apagar(Integer crvet){
