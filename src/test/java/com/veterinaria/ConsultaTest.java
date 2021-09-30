@@ -59,8 +59,6 @@ import java.util.List;
         Mockito.when(mock.alterar(Mockito.any(Consulta.class))).thenReturn(consulta);
 
         ConsultaService consultaService = new ConsultaService(mock);
-        consultaService.agendarConsulta(consulta2);
-        consultaService.agendarConsulta(consulta);
         consultaService.alterar(consulta2);
 
 
