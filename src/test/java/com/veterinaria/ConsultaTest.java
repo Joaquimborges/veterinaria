@@ -35,7 +35,9 @@ import java.util.List;
 
      List<Consulta> consultas = new ArrayList<>();
 
-
+     /**
+      * Autor Joaquim Borges
+      */
     @Test
    public void agendarUmaConsulta() {
         ConsultaPersistence mock = Mockito.mock(ConsultaPersistence.class);
@@ -53,6 +55,9 @@ import java.util.List;
     }
 
 
+     /**
+      * Autor Joaquim Borges
+      */
     @Test
    public void alterarOsDadosDeUmaConsulta() {
         ConsultaPersistence mock = Mockito.mock(ConsultaPersistence.class);
@@ -66,6 +71,9 @@ import java.util.List;
         assertEquals("alergia", consulta2.getMotivo());
     }
 
+     /**
+      * Autor Joaquim Borges
+      */
     @Test
    public void listarConsultasOrdenadaPelaDataDecrescente() {
         consultas.add(consulta2);
