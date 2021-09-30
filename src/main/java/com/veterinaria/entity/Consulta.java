@@ -24,8 +24,8 @@ public class Consulta {
         this.motivo = motivo;
         this.diagnosticoPossivel = diagnosticoPossivel;
         this.tratamentoSeguido = tratamentoSeguido;
-        this.dataDia = LocalDate.now();
-        this.hora = LocalTime.now();
+        this.dataDia = dataDia;
+        this.hora = hora;
         this.paciente = paciente;
         this.medicoVeterinario = medico;
     }

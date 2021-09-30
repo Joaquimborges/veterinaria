@@ -30,11 +30,13 @@ public class MedicoService {
 
     //valida cadastro médico por CRVET e CPF
     private boolean credenciaisNaoDuplicadas(Integer crvet, String cpf) {
+
         return medicopersistence.listarMedicos()
                 .stream().noneMatch(x -> x.getNumeroRegistro()
                         .equals(crvet) || x.getCpf()
                         .equals(cpf));
     }
+
 
     private Boolean medicoNaoExisteNaConsulta(Integer crvet) {
         for (Consulta consulta : consultaPersistence.listar()) {
@@ -45,6 +47,7 @@ public class MedicoService {
         return true;
     }
 
+  
     public Medico cadastrar(Medico medico) {
         if (credenciaisNaoDuplicadas(medico.getNumeroRegistro(), medico.getCpf())) {
             try {
@@ -59,17 +62,23 @@ public class MedicoService {
         return null;
     }
 
+
+
     public Medico getMedico(Integer crvet){
         return medicopersistence.obterUm(crvet);
     }
+
 
     public List<Medico> listar(){
         return medicopersistence.listarMedicos();
     }
 
+
     public Medico alterar(Medico medico){
         return medicopersistence.altera(medico);
     }
+
+
 
     public boolean apagar(Integer crvet){
         if (medicoNaoExisteNaConsulta(crvet)){
