@@ -27,10 +27,6 @@ public class ConsultaController {
         return consultaService.alterar(consulta);
     }
 
-    @GetMapping(value = "/consultasOrdenadoPorNome/{nomePaciente}/{cpfProprietario}")
-    public List<Consulta> ordenadoPorNomeProprietario(@PathVariable String nomePaciente, @PathVariable String cpfProprietario){
-        return consultaService.consultasPaciente(nomePaciente, cpfProprietario);
-    }
 
     @GetMapping(value = "/consultasOrdenadoPorDataDecrescente/{nomePaciente}/{cpfProprietario}")
     public List<Consulta> ordenadoPorData(@PathVariable String nomePaciente, @PathVariable String cpfProprietario){
