@@ -39,9 +39,9 @@ class ProprietarioServiceTest {
     void cadastrarProprietarioTest() {
         //==================================  Preparo do setup, ou seja prepara os caminhos que deveriam chamar a persistencia, e em vez disso chama o mock
 
-        Mockito.when(mockProprietarioPersistence.cadastrar(Mockito.any(Proprietario.class))).thenReturn(proprietario2);
+        Mockito.when(mockProprietarioPersistence.cadastrar(Mockito.any(Proprietario.class))).thenReturn(proprietario);
 
-        lista.add(proprietario3);
+        lista.add(proprietario);
 
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
@@ -49,7 +49,7 @@ class ProprietarioServiceTest {
         ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
-        proprietarioService.cadastrar(proprietario3);
+        proprietarioService.cadastrar(proprietario);
 
         //================================== Verifica através do assert, o que definirmos que queremos testar
         assertNotNull(proprietario3);
