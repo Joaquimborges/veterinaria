@@ -16,6 +16,7 @@ public class ConsultaService {
 
     private final ConsultaPersistence consultaPersistence;
     private  boolean existeConsultaParaOrganizar = false;
+    private  boolean organizaMesmoDiaPorDataEHora = false;
 
 
     public ConsultaService(ConsultaPersistence consultaPersistence){
@@ -78,7 +79,19 @@ public class ConsultaService {
         return consultasDoPaciente;
     }
 
-
+    public List<Consulta> consultasMesmoDiaPorDataEHora(LocalDate data){
+        List<Consulta> consultasMesmoDiaPorDataEHora = new ArrayList<>();
+        for (Consulta consulta : consultaPersistence.listar()){
+            if (consulta.getDataDia().equals(data)){
+                organizaMesmoDiaPorDataEHora = true;
+                consultasMesmoDiaPorDataEHora.add(consulta);
+            }
+        }
+        if (organizaMesmoDiaPorDataEHora){
+            consultasMesmoDiaPorDataEHora.sort(Comparator.comparing(Consulta::getHora));
+        }
+        return consultasMesmoDiaPorDataEHora;
+    }
 
 
 
