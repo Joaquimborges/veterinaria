@@ -31,7 +31,6 @@ public class MedicoPersistence {
      * metodo adiciona o objeto na lista
      * e salva em um arquivo json.
      */
-
     public Medico cadastrar(Medico medico){
         mapearObjeto();
         medicos.add(medico);
@@ -107,6 +106,7 @@ public class MedicoPersistence {
             mapper.writeValue(new File(arquivo), medicos);
         }catch (IOException e){
             e.printStackTrace();
+            return false;
         }
         return true;
 

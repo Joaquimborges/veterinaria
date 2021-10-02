@@ -13,6 +13,11 @@ import java.util.List;
 public class MedicoService {
 
 
+    private final MedicoPersistence persistence = new MedicoPersistence();
+    private final ConsultaPersistence consultaPersistence = new ConsultaPersistence();
+
+
+
     private MedicoPersistence medicopersistence;
     private ConsultaPersistence consultaPersistence;
 
@@ -37,7 +42,6 @@ public class MedicoService {
                         .equals(cpf));
     }
 
-
     private Boolean medicoNaoExisteNaConsulta(Integer crvet) {
         for (Consulta consulta : consultaPersistence.listar()) {
             if (consulta.getMedicoVeterinario().getNumeroRegistro().equals(crvet)) {
@@ -47,7 +51,6 @@ public class MedicoService {
         return true;
     }
 
-  
     public Medico cadastrar(Medico medico) {
         if (credenciaisNaoDuplicadas(medico.getNumeroRegistro(), medico.getCpf())) {
             try {
@@ -62,15 +65,23 @@ public class MedicoService {
         return null;
     }
 
-
-
     public Medico getMedico(Integer crvet){
         return medicopersistence.obterUm(crvet);
     }
-
-
+  
     public List<Medico> listar(){
         return medicopersistence.listarMedicos();
+    }
+
+    public Medico alterar(Medico medico){
+//        return persistence.altera(medico);
+        if (medico != null){
+            return persistence.altera(medico);
+        }
+        return null;
+
+
+
     }
 
 
@@ -79,14 +90,10 @@ public class MedicoService {
     }
 
 
-
     public boolean apagar(Integer crvet){
         if (medicoNaoExisteNaConsulta(crvet)){
             return medicopersistence.remove(crvet);
         }
         return false;
     }
-
-
-
 }
