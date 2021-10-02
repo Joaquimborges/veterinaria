@@ -8,16 +8,14 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.ConcurrentModificationException;
-import java.util.List;
+import java.util.*;
 
 
 @Service
 public class ConsultaService {
 
     private final ConsultaPersistence consultaPersistence;
+    private  boolean existeConsultaParaOrganizar = false;
 
 
     public ConsultaService(ConsultaPersistence consultaPersistence){
@@ -38,34 +36,19 @@ public class ConsultaService {
     }
 
 
-    public List<Consulta> consultasPaciente(String nomePaciente, String cpfProprietario) {
-        try {
-        List<Consulta> consultas = consultaPersistence.listar();
-        for (Consulta consulta : consultas) {
-            if (consulta.getPaciente().getNome().equals(nomePaciente) &&
-                    consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)) {
-                consultas.sort(Comparator.comparing(consul -> consul.getPaciente().getProprietario().getNome()));
-            }
-        }
-            return consultas;
-     }catch (ConcurrentModificationException e){
-            e.fillInStackTrace();
-        }
-
-        return Collections.emptyList();
-
-    }
-
-
     public List<Consulta> listarConsultaPorData(String nomePaciente, String cpfProprietario){
-        List<Consulta> consultas = consultaPersistence.listar();
+        List<Consulta> consultasDoPaciente = new ArrayList<>();
         for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getPaciente().getNome().equals(nomePaciente) &&
-                consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
-                consultas.sort(Comparator.comparing(Consulta::getDataDia).reversed());
+                    consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)) {
+                existeConsultaParaOrganizar = true;
+                consultasDoPaciente.add(consulta);
             }
         }
-        return consultas;
+        if (existeConsultaParaOrganizar){
+            consultasDoPaciente.sort(Comparator.comparing(Consulta::getDataDia).reversed());
+        }
+        return consultasDoPaciente;
     }
 
     public Integer totalConsultasMedico(Integer crm){
@@ -80,14 +63,19 @@ public class ConsultaService {
 
 
     public List<Consulta> consultasMesmoDia(LocalDate data, String nomePaciente, String cpfProprietario){
-        List<Consulta> consultas = consultaPersistence.listar();
+        List<Consulta> consultasDoPaciente = new ArrayList<>();
         for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getDataDia().equals(data) && consulta.getPaciente().getNome().equals(nomePaciente) &&
-                    consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
-                consultas.sort(Comparator.comparing(Consulta::getDataDia));
+                consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
+                existeConsultaParaOrganizar = true;
+                consultasDoPaciente.add(consulta);
             }
         }
-        return consultas;
+        if (existeConsultaParaOrganizar){
+            consultasDoPaciente.sort(Comparator.comparing(Consulta::getDataDia));
+
+        }
+        return consultasDoPaciente;
     }
 
 

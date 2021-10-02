@@ -35,15 +35,19 @@ import java.util.List;
 
      List<Consulta> consultas = new ArrayList<>();
 
-
+     /**
+      * Autor Joaquim Borges
+      */
     @Test
    public void agendarUmaConsulta() {
         ConsultaPersistence mock = Mockito.mock(ConsultaPersistence.class);
-        ConsultaService mockServ = Mockito.mock(ConsultaService.class);
         Mockito.when(mock.cadastrarConsulta(Mockito.any(Consulta.class))).thenReturn(consulta);
         Mockito.when(mock.listar()).thenReturn(consultas);
-        Mockito.when(mockServ.agendarConsulta(consulta)).thenReturn(consulta);
-        Mockito.when(mockServ.agendarConsulta(consulta2)).thenReturn(consulta2);
+
+        ConsultaService consultaService = new ConsultaService(mock);
+        consultaService.agendarConsulta(consulta);
+        consultaService.agendarConsulta(consulta2);
+
 
 
         assertNotNull(consulta.getPaciente());
@@ -51,18 +55,58 @@ import java.util.List;
     }
 
 
+     /**
+      * Autor Joaquim Borges
+      */
     @Test
    public void alterarOsDadosDeUmaConsulta() {
         ConsultaPersistence mock = Mockito.mock(ConsultaPersistence.class);
-        ConsultaService mockServ = Mockito.mock(ConsultaService.class);
         Mockito.when(mock.alterar(Mockito.any(Consulta.class))).thenReturn(consulta);
-        Mockito.when(mockServ.alterar(consulta2)).thenReturn(consulta2);
+
+        ConsultaService consultaService = new ConsultaService(mock);
+        consultaService.alterar(consulta2);
+
 
 
         assertEquals("alergia", consulta2.getMotivo());
     }
 
+     /**
+      * Autor Joaquim Borges
+      */
+    @Test
+   public void listarConsultasOrdenadaPelaDataDecrescente() {
+        consultas.add(consulta2);
+        consultas.add(consulta);
+        ConsultaPersistence mock = Mockito.mock(ConsultaPersistence.class);
+        Mockito.when(mock.listar()).thenReturn(consultas);
 
+        ConsultaService consultaService = new ConsultaService(mock);
+        List<Consulta> consultaOrdenada = consultaService
+                .listarConsultaPorData(paciente.getNome(), proprietario.getCpf());
+
+        assertEquals("Vomito", consultaOrdenada.get(0).getMotivo());
+    }
+
+     /**
+      *
+      * Autor Alex Cruz
+      */
+    @Test
+    public void listarTotalDeConsultaPorMedico(){
+        consultas.add(consulta2);
+        consultas.add(consulta);
+        ConsultaPersistence mockConsultaPersistence = Mockito.mock(ConsultaPersistence.class);
+        Mockito.when(mockConsultaPersistence.listar()).thenReturn(consultas);
+
+        ConsultaService consultaService = new ConsultaService(mockConsultaPersistence);
+        Integer ttConsulMed = consultaService.totalConsultasMedico(123764);
+
+        Mockito.verify(mockConsultaPersistence, Mockito.times(1)).listar();
+
+        assertEquals(ttConsulMed, consultas.size());
+
+    }
 
 
 
