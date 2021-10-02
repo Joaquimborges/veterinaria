@@ -58,7 +58,6 @@ class ProprietarioServiceTest {
             LocalDate.parse("2021-01-15") , LocalTime.of(10, 20), paciente, medico);
 
     @Test
-//    @BeforeEach
     void cadastrarProprietarioTest() {
         //==================================  Preparo do setup, ou seja prepara os caminhos que deveriam chamar a persistencia, e em vez disso chama o mock
         Mockito.when(mockProprietarioPersistence.cadastrar(Mockito.any(Proprietario.class))).thenReturn(proprietario2);
@@ -164,4 +163,6 @@ class ProprietarioServiceTest {
         //================================== Verifica através do assert, o que definirmos que queremos testar
         assertNotEquals(true,lista.contains(proprietario));
     }
+
+
 }
