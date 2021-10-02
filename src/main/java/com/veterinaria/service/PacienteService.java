@@ -74,7 +74,6 @@ public class PacienteService {
 
     private boolean pacienteNaoExisteNaConsulta(String cpf) {
 
-
             for (Consulta consulta : consultaPersistence.listar()) {
                 if (consulta.getPaciente().getProprietario().getCpf().equals(cpf)) {
                     return false;
@@ -87,7 +86,7 @@ public class PacienteService {
             if (pacienteNaoExisteNaConsulta(cpf))
                 return pacientePersistence.remove(nome, cpf);
             return false;
-        }
+    }
 
     public List<Paciente> listarPacientes(){
          List<Paciente> pacientes =  pacientePersistence.listarPacientes();
