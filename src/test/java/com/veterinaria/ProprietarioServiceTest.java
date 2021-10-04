@@ -154,7 +154,7 @@ class ProprietarioServiceTest {
         Mockito.when(mockConsultaPersistence.listar()).thenReturn(listaConsulta);
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
-        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence,mockConsultaPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
         proprietarioService.apagar(proprietario.getCpf());
