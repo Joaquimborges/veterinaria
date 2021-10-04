@@ -37,11 +37,10 @@ public class PacienteServiceTest {
         lista.add(paciente1);
         Mockito.when(mockPacientePersistence.listarPacientes()).thenReturn(lista);
 
-        PacienteService pacienteService = new PacienteService();
+        PacienteService pacienteService = new PacienteService(mockPacientePersistence);
 
         pacienteService.cadastraPaciente(paciente1);
-
-//        assertNotNull(paciente1);
+        assertNotNull(paciente1);
         assertTrue(lista.contains(paciente1));
     }
 
@@ -65,7 +64,7 @@ public class PacienteServiceTest {
         Mockito.when(mockPacientePersistence.altera(Mockito.any(Paciente.class))).thenReturn(paciente1);
         Mockito.when(mockPacientePersistence.listarPacientes()).thenReturn(lista);
 
-        PacienteService pacienteService = new PacienteService();
+        PacienteService pacienteService = new PacienteService(mockPacientePersistence);
 
         pacienteService.altera(paciente1);
 
@@ -78,7 +77,7 @@ public class PacienteServiceTest {
         Mockito.when(mockPacientePersistence.remove(Mockito.any(String.class), Mockito.any(String.class))).thenReturn(true);
         Mockito.when(mockPacientePersistence.listarPacientes()).thenReturn(lista);
 
-        PacienteService pacienteService = new PacienteService();
+        PacienteService pacienteService = new PacienteService(mockPacientePersistence);
 
         pacienteService.listarPacientes();
 
@@ -93,7 +92,7 @@ public class PacienteServiceTest {
         Mockito.when(mockConsultaPersistence.listar()).thenReturn(listaConsulta);
         Mockito.when(mockPacientePersistence.listarPacientes()).thenReturn(lista);
 
-        PacienteService pacienteService = new PacienteService();
+        PacienteService pacienteService = new PacienteService(mockPacientePersistence);
 
         pacienteService.apagar(paciente1.getNome(), proprietario.getCpf());
 
