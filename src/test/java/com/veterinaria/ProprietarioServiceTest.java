@@ -130,10 +130,8 @@ class ProprietarioServiceTest {
     @Test
     void listaProprietario() {
         //==================================  Preparo do setup, ou seja prepara os caminhos que deveriam chamar a persistencia, e em vez disso chama o mock
-        Mockito.when(mockProprietarioPersistence.remove(Mockito.any(String.class))).thenReturn(true);
-
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
-
+        lista.add(proprietario);
         ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
