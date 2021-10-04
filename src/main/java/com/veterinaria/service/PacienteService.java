@@ -4,6 +4,7 @@ import com.veterinaria.entity.Consulta;
 import com.veterinaria.entity.Paciente;
 import com.veterinaria.persistence.ConsultaPersistence;
 import com.veterinaria.persistence.PacientePersistence;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 
@@ -34,9 +35,11 @@ import java.util.List;
 
         }
 
-        public Paciente altera(Paciente paciente) {
+        public Paciente altera( Paciente paciente) {
             if (paciente.getProprietario() != null) {
                 pacientePersistence.altera(paciente);
+                //aqui ele nao retornava, nada!
+                return paciente;
             }
             return null;
         }
