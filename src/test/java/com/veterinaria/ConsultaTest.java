@@ -33,6 +33,12 @@ import java.util.List;
      Consulta consulta2 = new Consulta("alergia", "intoxicacao", "soro",
              LocalDate.parse("2019-02-12") ,LocalTime.of(8, 20), paciente, medico);
 
+     Consulta consulta3 = new Consulta("virose", "intoxicacao", "soro",
+             LocalDate.parse("2019-02-12") ,LocalTime.of(16, 20), paciente, medico);
+
+     Consulta consulta4 = new Consulta("trombose", "circulação", "soro",
+             LocalDate.parse("2019-02-12") ,LocalTime.of(18, 20), paciente, medico);
+
      List<Consulta> consultas = new ArrayList<>();
 
      /**
@@ -88,9 +94,46 @@ import java.util.List;
         assertEquals("Vomito", consultaOrdenada.get(0).getMotivo());
     }
 
+     /**
+      *
+      * Autor Alex Cruz
+      */
+    @Test
+   public void totalDeConsultaPorMedico(){
+        consultas.add(consulta2);
+        consultas.add(consulta);
+        ConsultaPersistence mockConsultaPersistence = Mockito.mock(ConsultaPersistence.class);
+        Mockito.when(mockConsultaPersistence.listar()).thenReturn(consultas);
+
+        ConsultaService consultaService = new ConsultaService(mockConsultaPersistence);
+        Integer ttConsulMed = consultaService.totalConsultasMedico(123764);
+
+        Mockito.verify(mockConsultaPersistence, Mockito.times(1)).listar();
+
+        assertEquals(ttConsulMed, consultas.size());
+
+    }
+
+     /**
+      *
+      * Autor Alex Cruz
+      */
+     @Test
+   public void listarConsultaMesmoDiaOrdenadaPorDataEHora(){
+         consultas.add(consulta2);
+         consultas.add(consulta4);
+         consultas.add(consulta3);
+         ConsultaPersistence mockConsultaPersistence = Mockito.mock(ConsultaPersistence.class);
+         Mockito.when(mockConsultaPersistence.listar()).thenReturn(consultas);
+
+         ConsultaService consultaService = new ConsultaService(mockConsultaPersistence);
+         List<Consulta> consultasMesmoDiaPorDataEHora = consultaService.consultasMesmoDiaPorDataEHora(
+                                                                            LocalDate.parse("2019-02-12"));
+
+         assertEquals(3, consultasMesmoDiaPorDataEHora.size());
+         assertEquals("alergia", consultasMesmoDiaPorDataEHora.get(0).getMotivo());
+         assertEquals("trombose", consultasMesmoDiaPorDataEHora.get(2).getMotivo());
 
 
-
-
-
-}
+   }
+ }
