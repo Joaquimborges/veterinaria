@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -63,7 +64,7 @@ public class PacienteServiceTest {
      * Data: 04.10.2021
      */
     @Test
-    void alteraPaciente(){
+    void alteraTest(){
         listaPaciente.add(paciente1);
 
         Mockito.when(mockPacientePersistence.altera(Mockito.any(Paciente.class))).thenReturn(paciente1);
@@ -73,7 +74,7 @@ public class PacienteServiceTest {
 
         pacienteService.altera(paciente1);
 
-        String expectedNome = "Amarildo";
+        String expectedNome = "Amora";
         String actualNome   = paciente1.getNome();
 
         assertEquals(expectedNome, actualNome);
@@ -101,6 +102,29 @@ public class PacienteServiceTest {
         assertEquals(p.getProprietario().getCpf(),proprietario2.getCpf());
     }
 
+    /**
+     *
+     * Autor Alex Cruz
+     * Data: 04/10/21
+     *
+     */
+    @Test
+    void listaPacienteTest(){
+        //==================================  Preparo do setup, ou seja prepara os caminhos que deveriam chamar a persistencia, e em vez disso chama o mock
+        listaPaciente.add(paciente1);
+        listaPaciente.add(paciente2);
+        Mockito.when(mockPacientePersistence.listarPacientes()).thenReturn(listaPaciente);
+
+        PacienteService pacienteService = new PacienteService(mockPacientePersistence);
+
+        //=================================== Testa efetivamente nosso código, as regras que foram criadas
+        List<Paciente> p = pacienteService.listarPacientes();
+
+        Mockito.verify(mockPacientePersistence, Mockito.times(1)).listarPacientes();
+
+        //================================== Verifica através do assert, o que definirmos que queremos testar
+        assertEquals(p.size(), this.listaPaciente.size());
+    }
 
 
 }
