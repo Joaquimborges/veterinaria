@@ -7,6 +7,7 @@ import com.veterinaria.persistence.ConsultaPersistence;
 import com.veterinaria.persistence.PacientePersistence;
 import com.veterinaria.persistence.ProprietarioPersistence;
 import com.veterinaria.service.PacienteService;
+import com.veterinaria.service.ProprietarioService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -76,6 +77,28 @@ public class PacienteServiceTest {
         String actualNome   = paciente1.getNome();
 
         assertEquals(expectedNome, actualNome);
+    }
+
+    /**
+     * Autor: Marcelo de Oliveira Santos
+     * Data: 04.10.2021
+     */
+    @Test
+    void obterPacienteTest() {
+        //==================================  Preparo do setup, ou seja prepara os caminhos que deveriam chamar a persistencia, e em vez disso chama o mock
+        listaPaciente.add(paciente2);
+        Mockito.when(mockPacientePersistence.obterPaciente(Mockito.any(String.class), Mockito.any(String.class))).thenReturn(paciente2);
+
+        Mockito.when(mockPacientePersistence.listarPacientes()).thenReturn(listaPaciente);
+
+        PacienteService pacienteService = new PacienteService(mockPacientePersistence);
+        //=================================== Testa efetivamente nosso código, as regras que foram criadas
+        Paciente p = pacienteService.obterPaciente(paciente2.getNome(),paciente2.getProprietario().getCpf());
+
+        Mockito.verify(mockPacientePersistence,Mockito.times(1)).obterPaciente(paciente2.getNome(), paciente2.getProprietario().getCpf());
+
+        //================================== Verifica através do assert, o que definirmos que queremos testar
+        assertEquals(p.getProprietario().getCpf(),proprietario2.getCpf());
     }
 
 
