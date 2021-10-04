@@ -22,7 +22,7 @@ public class MedicoServiceTest {
     MedicoPersistence impostorMedicoPersistence = Mockito.mock(MedicoPersistence.class);
 
 //    Criando a a medicoService
-    MedicoService medicoService = new MedicoService();
+    MedicoService medicoService = new MedicoService(impostorMedicoPersistence);
 //    Criando Lista medico
     ArrayList<Medico> listaImpostorMedico = new ArrayList<>();
 
@@ -137,7 +137,7 @@ public class MedicoServiceTest {
         Mockito.when(mockConsultaPersistence.listar()).thenReturn(listaConsulta);
         Mockito.when(impostorMedicoPersistence.listarMedicos()).thenReturn(listaImpostorMedico);
 
-        MedicoService medicoService = new MedicoService();
+        MedicoService medicoService = new MedicoService(impostorMedicoPersistence,mockConsultaPersistence);
 
         medicoService.apagar(medicoImpostor1.getNumeroRegistro());
 

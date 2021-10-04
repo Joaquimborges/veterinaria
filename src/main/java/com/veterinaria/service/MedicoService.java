@@ -13,11 +13,6 @@ import java.util.List;
 public class MedicoService {
 
 
-    private final MedicoPersistence persistence = new MedicoPersistence();
-    private final ConsultaPersistence consultaPersistence = new ConsultaPersistence();
-
-
-
     private MedicoPersistence medicopersistence;
     private ConsultaPersistence consultaPersistence;
 
@@ -74,21 +69,11 @@ public class MedicoService {
     }
 
     public Medico alterar(Medico medico){
-//        return persistence.altera(medico);
         if (medico != null){
-            return persistence.altera(medico);
+            return medicopersistence.altera(medico);
         }
         return null;
-
-
-
     }
-
-
-    public Medico alterar(Medico medico){
-        return medicopersistence.altera(medico);
-    }
-
 
     public boolean apagar(Integer crvet){
         if (medicoNaoExisteNaConsulta(crvet)){
