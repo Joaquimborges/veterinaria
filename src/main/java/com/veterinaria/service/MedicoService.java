@@ -13,30 +13,25 @@ import java.util.List;
 public class MedicoService {
 
 
-    private final MedicoPersistence persistence = new MedicoPersistence();
-    private final ConsultaPersistence consultaPersistence = new ConsultaPersistence();
-
-
-
-    private MedicoPersistence medicopersistence;
-    private ConsultaPersistence consultaPersistence;
+    private MedicoPersistence medicoPersistence= new MedicoPersistence();
+    private ConsultaPersistence consultaPersistence = new ConsultaPersistence();
 
     public MedicoService(MedicoPersistence medicoPersistence){
-        this.medicopersistence = medicoPersistence;
+        this.medicoPersistence = medicoPersistence;
     }
     public MedicoService(ConsultaPersistence consultaPersistence){
         this.consultaPersistence = consultaPersistence;
     }
     @Autowired
     public MedicoService(MedicoPersistence medicoPersistence, ConsultaPersistence consultaPersistence){
-        this.medicopersistence = medicoPersistence;
+        this.medicoPersistence = medicoPersistence;
         this.consultaPersistence = consultaPersistence;
     }
 
     //valida cadastro médico por CRVET e CPF
     private boolean credenciaisNaoDuplicadas(Integer crvet, String cpf) {
 
-        return medicopersistence.listarMedicos()
+        return medicoPersistence.listarMedicos()
                 .stream().noneMatch(x -> x.getNumeroRegistro()
                         .equals(crvet) || x.getCpf()
                         .equals(cpf));
@@ -54,7 +49,7 @@ public class MedicoService {
     public Medico cadastrar(Medico medico) {
         if (credenciaisNaoDuplicadas(medico.getNumeroRegistro(), medico.getCpf())) {
             try {
-                medicopersistence.cadastrar(medico);
+                medicoPersistence.cadastrar(medico);
                 return medico;
             } catch (RuntimeException e) {
                 e.printStackTrace();
@@ -66,17 +61,17 @@ public class MedicoService {
     }
 
     public Medico getMedico(Integer crvet){
-        return medicopersistence.obterUm(crvet);
+        return medicoPersistence.obterUm(crvet);
     }
   
     public List<Medico> listar(){
-        return medicopersistence.listarMedicos();
+        return medicoPersistence.listarMedicos();
     }
 
     public Medico alterar(Medico medico){
 //        return persistence.altera(medico);
         if (medico != null){
-            return persistence.altera(medico);
+            return medicoPersistence.altera(medico);
         }
         return null;
 
@@ -85,14 +80,10 @@ public class MedicoService {
     }
 
 
-    public Medico alterar(Medico medico){
-        return medicopersistence.altera(medico);
-    }
-
 
     public boolean apagar(Integer crvet){
         if (medicoNaoExisteNaConsulta(crvet)){
-            return medicopersistence.remove(crvet);
+            return medicoPersistence.remove(crvet);
         }
         return false;
     }
