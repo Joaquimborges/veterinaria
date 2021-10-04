@@ -10,7 +10,7 @@ import java.util.UUID;
 @Getter
 public class Paciente {
 
-    private String numeroDoPaciente;
+    private final String numeroDoPaciente;
     private String especie;
     private String cor;
     private String raca;
@@ -19,10 +19,14 @@ public class Paciente {
     private LocalDate dataNascimento;
     private Proprietario proprietario;
 
-    public String getNumeroDoPaciente() {
-        numeroDoPaciente = UUID.randomUUID().toString();
-        return numeroDoPaciente;
+
+
+    public String setNumeroDoPaciente() {
+        return UUID.randomUUID().toString();
+
     }
+
+
 
     public Paciente(String especie, String cor, String raca, String nome, String sexo, LocalDate dataNascimento, Proprietario proprietario) {
         this.especie = especie;
@@ -32,6 +36,8 @@ public class Paciente {
         this.sexo = sexo;
         this.dataNascimento = dataNascimento;
         this.proprietario = proprietario;
+        numeroDoPaciente = setNumeroDoPaciente();
+
     }
 
     @Override
