@@ -8,8 +8,6 @@ import com.veterinaria.persistence.MedicoPersistence;
 import com.veterinaria.service.MedicoService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 *   Author: Matheus Willock
 *   Date: 29/09/21
 */
-@SpringBootTest
 public class MedicoServiceTest {
 
 // Criando os mocks da medico e Consulta Persistence;
@@ -140,7 +137,7 @@ public class MedicoServiceTest {
         Mockito.when(mockConsultaPersistence.listar()).thenReturn(listaConsulta);
         Mockito.when(impostorMedicoPersistence.listarMedicos()).thenReturn(listaImpostorMedico);
 
-        MedicoService medicoService = new MedicoService(impostorMedicoPersistence);
+        MedicoService medicoService = new MedicoService(impostorMedicoPersistence,mockConsultaPersistence);
 
         medicoService.apagar(medicoImpostor1.getNumeroRegistro());
 

@@ -5,6 +5,7 @@ import com.veterinaria.entity.Paciente;
 import com.veterinaria.entity.Proprietario;
 import com.veterinaria.persistence.ConsultaPersistence;
 import com.veterinaria.persistence.PacientePersistence;
+import com.veterinaria.persistence.ProprietarioPersistence;
 import com.veterinaria.service.PacienteService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -19,6 +20,7 @@ public class PacienteServiceTest {
 
     PacientePersistence mockPacientePersistence = Mockito.mock(PacientePersistence.class);
     ConsultaPersistence mockConsultaPersistence = Mockito.mock(ConsultaPersistence.class);
+    ProprietarioPersistence mockProprietarioPersistence = Mockito.mock(ProprietarioPersistence.class);
 
     ArrayList<Paciente> lista = new ArrayList<>();
     ArrayList<Consulta> listaConsulta = new ArrayList<>();
@@ -40,7 +42,8 @@ public class PacienteServiceTest {
         PacienteService pacienteService = new PacienteService(mockPacientePersistence);
 
         pacienteService.cadastraPaciente(paciente1);
-        assertNotNull(paciente1);
+
+//        assertNotNull(paciente1);
         assertTrue(lista.contains(paciente1));
     }
 
@@ -92,7 +95,7 @@ public class PacienteServiceTest {
         Mockito.when(mockConsultaPersistence.listar()).thenReturn(listaConsulta);
         Mockito.when(mockPacientePersistence.listarPacientes()).thenReturn(lista);
 
-        PacienteService pacienteService = new PacienteService(mockPacientePersistence);
+        PacienteService pacienteService = new PacienteService(mockPacientePersistence,mockProprietarioPersistence,mockConsultaPersistence);
 
         pacienteService.apagar(paciente1.getNome(), proprietario.getCpf());
 
