@@ -1,23 +1,32 @@
 package com.veterinaria.service;
 
-
-
 import com.veterinaria.entity.Consulta;
 import com.veterinaria.entity.Proprietario;
 import com.veterinaria.persistence.ConsultaPersistence;
 import com.veterinaria.persistence.ProprietarioPersistence;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class ProprietarioService {
 
-    private final ProprietarioPersistence persistence = new ProprietarioPersistence();
-    private final ConsultaPersistence consultaPersistence = new ConsultaPersistence();
+    private ProprietarioPersistence persistence;
+    private ConsultaPersistence consultaPersistence;
 
+    public ProprietarioService(ProprietarioPersistence proprietarioPersistence){
+        this.persistence = proprietarioPersistence;
+    }
 
+    public ProprietarioService(ConsultaPersistence consultaPersistence){
+        this.consultaPersistence = consultaPersistence;
+    }
+    @Autowired
+    public ProprietarioService(ProprietarioPersistence proprietarioPersistence, ConsultaPersistence consultaPersistence){
+        this.persistence = proprietarioPersistence;
+        this.consultaPersistence = consultaPersistence;
+    }
 
 
     private boolean cpfNaoUtilizado(String cpf){
@@ -29,8 +38,6 @@ public class ProprietarioService {
         return true;
     }
 
-
-
     private boolean pacienteNaoExisteNaConsulta(String cpf){
         for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getPaciente().getProprietario().getCpf().equals(cpf)){
@@ -39,7 +46,6 @@ public class ProprietarioService {
         }
         return true;
     }
-
 
     public Proprietario cadastrar(Proprietario proprietario){
         if (cpfNaoUtilizado(proprietario.getCpf())){
@@ -55,7 +61,6 @@ public class ProprietarioService {
         return null;
     }
 
-
     public Proprietario getProprietario(String cpf){
         return persistence.obterUm(cpf);
     }
@@ -65,7 +70,6 @@ public class ProprietarioService {
         return persistence.listarProprietarios();
     }
 
-
     public Proprietario altera(Proprietario proprietario){
         if (proprietario != null){
             return persistence.altera(proprietario);
@@ -73,24 +77,12 @@ public class ProprietarioService {
         return null;
     }
 
-
     public boolean apagar(String cpf){
         if (pacienteNaoExisteNaConsulta(cpf)){
             return persistence.remove(cpf);
         }
         return false;
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
