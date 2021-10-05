@@ -1,22 +1,22 @@
 package com.veterinaria.persistence;
 
-
-
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.veterinaria.entity.Consulta;
+import org.springframework.stereotype.Component;
+
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Component
 public class ConsultaPersistence {
     final String arquivo = "agendaDeConultas.json";
     ObjectMapper mapper = new ObjectMapper();
-
 
     private List<Consulta> agendaDeConsultas = new ArrayList<>();
 
@@ -30,7 +30,6 @@ public class ConsultaPersistence {
          */
     }
 
-
     public Consulta cadastrarConsulta(Consulta consulta) {
         mapearObjeto();
         agendaDeConsultas.add(consulta);
@@ -43,8 +42,6 @@ public class ConsultaPersistence {
         return consulta;
     }
 
-
-
     public List<Consulta> listar() {
         mapearObjeto();
         try {
@@ -54,7 +51,6 @@ public class ConsultaPersistence {
             e.printStackTrace();
         }
         return agendaDeConsultas;
-
 
     }
 
