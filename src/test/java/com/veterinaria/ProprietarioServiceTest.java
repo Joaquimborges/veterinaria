@@ -77,9 +77,6 @@ class ProprietarioServiceTest {
         //==================================  Preparo do setup, ou seja prepara os caminhos que deveriam chamar a persistencia, e em vez disso chama o mock
 
         Mockito.when(mockProprietarioPersistence.cadastrar(Mockito.any(Proprietario.class))).thenReturn(proprietario2);
-
-        lista.add(proprietario2);
-
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
         ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence);
@@ -148,18 +145,18 @@ class ProprietarioServiceTest {
         //==================================  Preparo do setup, ou seja prepara os caminhos que deveriam chamar a persistencia, e em vez disso chama o mock
         Mockito.when(mockProprietarioPersistence.remove(Mockito.any(String.class))).thenReturn(true);
         lista.add(proprietario);
-        listaConsulta.add(consulta);
         Mockito.when(mockConsultaPersistence.listar()).thenReturn(listaConsulta);
         Mockito.when(mockProprietarioPersistence.listarProprietarios()).thenReturn(lista);
 
-        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence,mockConsultaPersistence);
+        ProprietarioService proprietarioService = new ProprietarioService(mockProprietarioPersistence,
+                                                                            mockConsultaPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
-        proprietarioService.apagar(proprietario.getCpf());
+        boolean pacienteApagado = proprietarioService.apagar(proprietario.getCpf());
 
         Mockito.verify(mockProprietarioPersistence, Mockito.times(1)).remove(proprietario.getCpf());
         //================================== Verifica através do assert, o que definirmos que queremos testar
-        assertNotEquals(true,lista.contains(proprietario));
+        assertNotEquals(true,lista.contains(pacienteApagado));
     }
 
 

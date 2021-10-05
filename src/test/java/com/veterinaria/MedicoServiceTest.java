@@ -19,16 +19,12 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class MedicoServiceTest {
 
-
-
     MedicoPersistence impostorMedicoPersistence = Mockito.mock(MedicoPersistence.class);
     MedicoService medicoService = new MedicoService(impostorMedicoPersistence);
 
     ConsultaPersistence impostorConsultaPersistence = Mockito.mock(ConsultaPersistence.class);
 
-
     ArrayList<Consulta> listaConsulta = new ArrayList<>();
-
 
     LocalDate data = LocalDate.of(2021, 9, 25);
     Proprietario proprietario = new Proprietario("Moises", "Sousa", "11883344556",
@@ -43,17 +39,11 @@ public class MedicoServiceTest {
     Consulta consulta = new Consulta("Vomito", "intoxicacao", "soro",
             LocalDate.parse("2021-01-15") , LocalTime.of(10, 20), paciente, medico);
 
-
-
     ArrayList<Medico> listaImpostorMedico = new ArrayList<>();
-
-
 
     Medico  medicoImpostor = new Medico("Tsunade", "Senju", "45612334567", 54342, "Cardio");
     Medico  medicoImpostorAlterado = new Medico("Sakura", "Uchiha", "24313345569", 43551, "Animais pequenos");
     Medico  medicoImpostor2 = new Medico("Hugo", "Damm", "24411267680", 43551, "Animais Grandes");
-
-
 
     @Test
     void CadastrarMedico() {
@@ -63,12 +53,9 @@ public class MedicoServiceTest {
         Medico medicoCadastrado = medicoService.cadastrar(medicoImpostor);
         Mockito.verify(impostorMedicoPersistence, Mockito.times(1)).cadastrar(medicoImpostor);
 
-
         assertEquals(listaImpostorMedico.contains(medicoImpostor), listaImpostorMedico.contains(medicoImpostor));
 
     };
-
-
 
     @Test
     void getMedico() {
@@ -79,9 +66,7 @@ public class MedicoServiceTest {
 
         Mockito.verify(impostorMedicoPersistence,Mockito.times(1)).obterUm(medicoImpostor.getNumeroRegistro());
 
-
         assertEquals(medicoImpostor.getNumeroRegistro(),medicoImpostor.getNumeroRegistro());
-
 
     }
 
@@ -114,8 +99,6 @@ public class MedicoServiceTest {
 
     }
 
-
-
     @Test
     void apagarMedicoTest(){
         listaImpostorMedico.add(medicoImpostor);
@@ -128,10 +111,9 @@ public class MedicoServiceTest {
         MedicoService medicoServiceApagar = new MedicoService(impostorMedicoPersistence, impostorConsultaPersistence);
 
         //=================================== Testa efetivamente nosso código, as regras que foram criadas
-        medicoServiceApagar.apagar(medicoImpostor2.getNumeroRegistro());
+        boolean medicoApagado = medicoServiceApagar.apagar(medicoImpostor2.getNumeroRegistro());
 
-
-        assertFalse(listaImpostorMedico.contains(medicoImpostor2));
+        assertFalse(listaImpostorMedico.contains(medicoApagado));
 
     }
 }
