@@ -31,7 +31,6 @@ public class MedicoPersistence {
      * metodo adiciona o objeto na lista
      * e salva em um arquivo json.
      */
-
     public Medico cadastrar(Medico medico){
         mapearObjeto();
         medicos.add(medico);
@@ -90,18 +89,15 @@ public class MedicoPersistence {
                 }catch (IOException e){
                     e.printStackTrace();
                 }
+            } else {
+                throw new RuntimeException("Numero de registro divergente");
             }
         }
         return medico;
     }
 
-
-
-
-
-    public Boolean remove(Integer crvet){
+    public boolean remove(Integer crvet){
         mapearObjeto();
-
         listarMedicos().removeIf(medico -> medico.getNumeroRegistro().equals(crvet));
         try {
             mapper.writeValue(new File(arquivo), medicos);

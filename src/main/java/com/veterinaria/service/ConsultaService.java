@@ -18,6 +18,7 @@ public class ConsultaService {
     private  boolean existeConsultaParaOrganizar = false;
 
 
+
     public ConsultaService(ConsultaPersistence consultaPersistence){
         this.consultaPersistence = consultaPersistence;
     }
@@ -62,29 +63,24 @@ public class ConsultaService {
     }
 
 
-    public List<Consulta> consultasMesmoDia(LocalDate data, String nomePaciente, String cpfProprietario){
-        List<Consulta> consultasDoPaciente = new ArrayList<>();
+    /**
+     * @param data
+     * @return List<Consulta>
+     */
+
+    public List<Consulta> consultasMesmoDia(LocalDate data){
+        List<Consulta> consultasMesmoDiaPorDataEHora = new ArrayList<>();
         for (Consulta consulta : consultaPersistence.listar()){
-            if (consulta.getDataDia().equals(data) && consulta.getPaciente().getNome().equals(nomePaciente) &&
-                consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
+            if (consulta.getDataDia().equals(data)){
                 existeConsultaParaOrganizar = true;
-                consultasDoPaciente.add(consulta);
+                consultasMesmoDiaPorDataEHora.add(consulta);
             }
         }
         if (existeConsultaParaOrganizar){
-            consultasDoPaciente.sort(Comparator.comparing(Consulta::getDataDia));
-
+            consultasMesmoDiaPorDataEHora.sort(Comparator.comparing(Consulta::getHora));
         }
-        return consultasDoPaciente;
+        return consultasMesmoDiaPorDataEHora;
+
     }
-
-
-
-
-
-
-
-
-
 
 }

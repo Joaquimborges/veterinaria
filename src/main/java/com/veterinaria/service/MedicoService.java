@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 public class MedicoService {
 
-
     private MedicoPersistence medicopersistence;
     private ConsultaPersistence consultaPersistence;
 
@@ -37,8 +36,7 @@ public class MedicoService {
                         .equals(cpf));
     }
 
-
-    private Boolean medicoNaoExisteNaConsulta(Integer crvet) {
+    private boolean medicoNaoExisteNaConsulta(Integer crvet) {
         for (Consulta consulta : consultaPersistence.listar()) {
             if (consulta.getMedicoVeterinario().getNumeroRegistro().equals(crvet)) {
                 return false;
@@ -47,7 +45,6 @@ public class MedicoService {
         return true;
     }
 
-  
     public Medico cadastrar(Medico medico) {
         if (credenciaisNaoDuplicadas(medico.getNumeroRegistro(), medico.getCpf())) {
             try {
@@ -57,36 +54,30 @@ public class MedicoService {
                 e.printStackTrace();
             }
         } else {
-            throw new RuntimeException("CPF ou CRM já em uso");
+            throw new RuntimeException("CPF ou CRVET já em uso");
         }
         return null;
     }
-
-
 
     public Medico getMedico(Integer crvet){
         return medicopersistence.obterUm(crvet);
     }
 
-
     public List<Medico> listar(){
         return medicopersistence.listarMedicos();
     }
 
-
     public Medico alterar(Medico medico){
-        return medicopersistence.altera(medico);
+        if (medico != null){
+            return medicopersistence.altera(medico);
+        }
+        return null;
     }
-
-
 
     public boolean apagar(Integer crvet){
         if (medicoNaoExisteNaConsulta(crvet)){
             return medicopersistence.remove(crvet);
         }
-        return false;
+        return true;
     }
-
-
-
 }

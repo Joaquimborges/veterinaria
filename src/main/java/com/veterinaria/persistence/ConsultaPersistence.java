@@ -52,7 +52,6 @@ public class ConsultaPersistence {
         }
         return agendaDeConsultas;
 
-
     }
 
     public Consulta alterar(Consulta consulta){
