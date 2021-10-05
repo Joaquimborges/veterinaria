@@ -16,7 +16,7 @@ public class ConsultaService {
 
     private final ConsultaPersistence consultaPersistence;
     private  boolean existeConsultaParaOrganizar = false;
-    private  boolean organizaMesmoDiaPorDataEHora = false;
+
 
 
     public ConsultaService(ConsultaPersistence consultaPersistence){
@@ -62,11 +62,8 @@ public class ConsultaService {
         return total;
     }
 
+
     /**
-     * Método criado reccebendo data, nomePaciente, proprietarioCpf, refatorado apenas para recceber data e atendder a requitos
-     * solicitados. Retorna uma lista de consulta do mesmo dia orddenado por hora.
-     * Autor da refatoração Alex Cruz
-     *
      * @param data
      * @return List<Consulta>
      */
@@ -75,14 +72,15 @@ public class ConsultaService {
         List<Consulta> consultasMesmoDiaPorDataEHora = new ArrayList<>();
         for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getDataDia().equals(data)){
-                organizaMesmoDiaPorDataEHora = true;
+                existeConsultaParaOrganizar = true;
                 consultasMesmoDiaPorDataEHora.add(consulta);
             }
         }
-        if (organizaMesmoDiaPorDataEHora){
+        if (existeConsultaParaOrganizar){
             consultasMesmoDiaPorDataEHora.sort(Comparator.comparing(Consulta::getHora));
         }
         return consultasMesmoDiaPorDataEHora;
+
     }
 
 }
