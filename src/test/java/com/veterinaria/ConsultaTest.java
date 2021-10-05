@@ -97,6 +97,7 @@ import java.util.List;
      /**
       *
       * Autor Alex Cruz
+      * Data:03/10/21
       */
     @Test
    public void totalDeConsultaPorMedico(){
@@ -117,9 +118,10 @@ import java.util.List;
      /**
       *
       * Autor Alex Cruz
+      * Data: 03/10/21
       */
      @Test
-   public void listarConsultaMesmoDiaOrdenadaPorDataEHora(){
+   public void listarConsultaMesmoDiaTest(){
          consultas.add(consulta2);
          consultas.add(consulta4);
          consultas.add(consulta3);
@@ -127,7 +129,7 @@ import java.util.List;
          Mockito.when(mockConsultaPersistence.listar()).thenReturn(consultas);
 
          ConsultaService consultaService = new ConsultaService(mockConsultaPersistence);
-         List<Consulta> consultasMesmoDiaPorDataEHora = consultaService.consultasMesmoDiaPorDataEHora(
+         List<Consulta> consultasMesmoDiaPorDataEHora = consultaService.consultasMesmoDia(
                                                                             LocalDate.parse("2019-02-12"));
 
          assertEquals(3, consultasMesmoDiaPorDataEHora.size());

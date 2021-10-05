@@ -62,24 +62,16 @@ public class ConsultaService {
         return total;
     }
 
+    /**
+     * Método criado reccebendo data, nomePaciente, proprietarioCpf, refatorado apenas para recceber data e atendder a requitos
+     * solicitados. Retorna uma lista de consulta do mesmo dia orddenado por hora.
+     * Autor da refatoração Alex Cruz
+     *
+     * @param data
+     * @return List<Consulta>
+     */
 
-    public List<Consulta> consultasMesmoDia(LocalDate data, String nomePaciente, String cpfProprietario){
-        List<Consulta> consultasDoPaciente = new ArrayList<>();
-        for (Consulta consulta : consultaPersistence.listar()){
-            if (consulta.getDataDia().equals(data) && consulta.getPaciente().getNome().equals(nomePaciente) &&
-                consulta.getPaciente().getProprietario().getCpf().equals(cpfProprietario)){
-                existeConsultaParaOrganizar = true;
-                consultasDoPaciente.add(consulta);
-            }
-        }
-        if (existeConsultaParaOrganizar){
-            consultasDoPaciente.sort(Comparator.comparing(Consulta::getDataDia));
-
-        }
-        return consultasDoPaciente;
-    }
-
-    public List<Consulta> consultasMesmoDiaPorDataEHora(LocalDate data){
+    public List<Consulta> consultasMesmoDia(LocalDate data){
         List<Consulta> consultasMesmoDiaPorDataEHora = new ArrayList<>();
         for (Consulta consulta : consultaPersistence.listar()){
             if (consulta.getDataDia().equals(data)){
@@ -92,12 +84,5 @@ public class ConsultaService {
         }
         return consultasMesmoDiaPorDataEHora;
     }
-
-
-
-
-
-
-
 
 }
