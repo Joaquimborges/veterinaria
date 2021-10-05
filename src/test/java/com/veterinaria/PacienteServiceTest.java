@@ -55,7 +55,7 @@ public class PacienteServiceTest {
         Paciente p = pacienteService.cadastraPaciente(paciente1);
 
         assertNotNull(p);
-        assertTrue(p.getNome().equals(paciente1.getNome()));
+        assertEquals(p.getNome(), paciente1.getNome());
 
     }
 
