@@ -5,7 +5,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.veterinaria.entity.Medico;
-import lombok.Setter;
+
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-@Setter
+@Component
 public class MedicoPersistence {
     final String arquivo = "medicos.json";
 
@@ -31,7 +31,6 @@ public class MedicoPersistence {
      * metodo adiciona o objeto na lista
      * e salva em um arquivo json.
      */
-
     public Medico cadastrar(Medico medico){
         mapearObjeto();
         medicos.add(medico);

@@ -1,5 +1,5 @@
 package com.veterinaria;
-
+import com.veterinaria.entity.Medico;
 import com.veterinaria.entity.Consulta;
 import com.veterinaria.entity.Medico;
 import com.veterinaria.entity.Paciente;
@@ -7,79 +7,145 @@ import com.veterinaria.persistence.ConsultaPersistence;
 import com.veterinaria.persistence.MedicoPersistence;
 import com.veterinaria.service.MedicoService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/*
+*   Author: Matheus Willock
+*   Date: 29/09/21
+*/
 public class MedicoServiceTest {
 
-    MedicoPersistence mockMedicoPersistence = Mockito.mock(MedicoPersistence.class);
-    ConsultaPersistence mockConsultaPersistence = Mockito.mock(ConsultaPersistence.class);
+// Criando os mocks da medico e Consulta Persistence;
+    MedicoPersistence impostorMedicoPersistence = Mockito.mock(MedicoPersistence.class);
 
-    ArrayList<Medico> lista           = new ArrayList<>();
-    ArrayList<Consulta> listaConsulta   = new ArrayList<>();
+//    Criando a a medicoService
+    MedicoService medicoService = new MedicoService(impostorMedicoPersistence);
+//    Criando Lista medico
+    ArrayList<Medico> listaImpostorMedico = new ArrayList<>();
 
-    Medico medico1 = new Medico("DrPaulo", "Roberto", "12345678", 123, "veterinario");
-    Medico medico2 = new Medico("DrRoberto", "Mineiro", "98765432", 456, "animal");
-    Medico medico3 = new Medico("DrMarcelo", "Teste", "12312312", 756, "animal2");
-    Medico medico4 = new Medico("DrHugo", "Damm", "098765", 890, "animal2");
+    Medico  medicoImpostor = new Medico("Tsunade", "Senju", "45612334567", 54342, "Cardio");
+    Medico  medicoImpostor1 = new Medico("Sakura", "Uticha", "24313345569", 10102, "Animais pequenos");
+    Medico  medicoImpostor2 = new Medico("Hugo", "Damm", "24411267680", 43551, "Animais Grandes");
+
 
     @Test
-    void cadastrarMedicoTest(){
-        Mockito.when(mockMedicoPersistence.cadastrar(Mockito.any(Medico.class))).thenReturn(medico3);
-        lista.add(medico3);
-        Mockito.when(mockMedicoPersistence.listarMedicos()).thenReturn(lista);
+    void CadastrorMedico() {
+        /*
+         *  Testando
+         *   - Se o crm e cpf já não existem no cadastro;
+         *       - Caso Não exista é cadastrado os dados do médico.
+         *       - Se caso caso exista o cadastro é recusado
+         *   - Após as validações é feito a cricao do arquivo e escrita.
+         * */
 
-        MedicoService medicoService = new MedicoService();
+        //==================================  Preparo do setup, ou seja prepara os caminhos que deveriam chamar a persistencia, e em vez disso chama o mock
 
-        medicoService.cadastrar(medico3);
-        assertNotNull(medico3);
+        Mockito.when(impostorMedicoPersistence.cadastrar(medicoImpostor)).thenReturn(medicoImpostor);
+
+        listaImpostorMedico.add(medicoImpostor);
+
+//        Mockito.when(impostorMedicoPersistence.listarMedicos()).thenReturn(medicoImpostor2);
+
+        //=================================== Testa efetivamente nosso código, as regras que foram criadas
+
+        medicoService.cadastrar(medicoImpostor);
+
+        //================================== Verifica através do assert, o que definirmos que queremos testar
+        assertNotNull(listaImpostorMedico.equals(medicoImpostor));
+
+//        assertNotNull(medicoImpostor1);
+    };
+
+    @Test
+    void getMedico() {
+        /*
+         *  Testando
+         *   - A busca do medico pelo crvet
+         *      - Aciona o método mapearObjeto da persistence buscando o crvet
+         *      - Caso True ele nos retorna o objeto.
+         */
+
+        //==================================  Preparo do setup, ou seja prepara os caminhos que deveriam chamar a persistencia, e em vez disso chama o mock
+
+        Mockito.when(impostorMedicoPersistence.obterUm(medicoImpostor1.getNumeroRegistro())).thenReturn(medicoImpostor1);
+
+        //=================================== Testa efetivamente nosso código, as regras que foram criadas
+        medicoService.getMedico(medicoImpostor1.getNumeroRegistro());
+
+        //================================== Verifica através do assert, o que definirmos que queremos testar
+        assertNotNull(medicoImpostor1);
     }
+
+/*
+ *   Author: Matheus Willock
+ *   Date: 29/09/21
+ * */
+
+/*
+ *   Author: Hugo Damm
+ *   Date: 29/09/21
+*/
+    ConsultaPersistence mockConsultaPersistence = Mockito.mock(ConsultaPersistence.class);
+
+    ArrayList<Consulta> listaConsulta = new ArrayList<>();
 
     @Test
     void alteraMedicoTest(){
-        lista.add(medico1);
+        listaImpostorMedico.add(medicoImpostor1);
 
-        Mockito.when(mockMedicoPersistence.altera(Mockito.any(Medico.class))).thenReturn(medico2);
-        Mockito.when(mockMedicoPersistence.listarMedicos()).thenReturn(lista);
+        Mockito.when(impostorMedicoPersistence.altera(Mockito.any(Medico.class))).thenReturn(medicoImpostor1);
+        Mockito.when(impostorMedicoPersistence.listarMedicos()).thenReturn(listaImpostorMedico);
 
-        MedicoService medicoService = new MedicoService();
+        medicoService.alterar(medicoImpostor1);
+        impostorMedicoPersistence.altera(medicoImpostor1);
 
-        medicoService.alterar(medico2);
+        String expectedNome = "Sakura";
+        String actualNome = medicoImpostor1.getNome();
 
-        String expectedNome = "DrRoberto";
-        String actualNome = medico2.getNome();
+/*
+        String expectedNome = "José";
+        String actualNome = medicoImpostor1.getNome();
+
+        Não está funcionando tlvez algum problema na chamada dos métodos
+        assertFalse(medicoImpostor1.equals(expectedNome));
+
+ * */
 
         assertTrue(actualNome.equals(expectedNome));
+
 
     }
 
     @Test
     void listaMedicoTest(){
-        Mockito.when(mockMedicoPersistence.remove(Mockito.any(Integer.class))).thenReturn(true);
-        Mockito.when(mockMedicoPersistence.listarMedicos()).thenReturn(lista);
 
-        MedicoService medicoService = new MedicoService();
+        Mockito.when(impostorMedicoPersistence.remove(Mockito.any(Integer.class))).thenReturn(true);
+        Mockito.when(impostorMedicoPersistence.listarMedicos()).thenReturn(listaImpostorMedico);
+
 
         medicoService.listar();
 
-        assertNotNull(medico1);
+        assertNotNull(listaImpostorMedico);
     }
 
     @Test
     void apagarMedicoTest(){
-        Mockito.when(mockMedicoPersistence.remove(Mockito.any(Integer.class))).thenReturn(true);
+        Mockito.when(impostorMedicoPersistence.remove(Mockito.any(Integer.class))).thenReturn(true);
         Mockito.when(mockConsultaPersistence.listar()).thenReturn(listaConsulta);
-        Mockito.when(mockMedicoPersistence.listarMedicos()).thenReturn(lista);
+        Mockito.when(impostorMedicoPersistence.listarMedicos()).thenReturn(listaImpostorMedico);
 
-        MedicoService medicoService = new MedicoService();
+        MedicoService medicoService = new MedicoService(impostorMedicoPersistence,mockConsultaPersistence);
 
-        medicoService.apagar(medico1.getNumeroRegistro());
+        medicoService.apagar(medicoImpostor1.getNumeroRegistro());
 
-        assertNotEquals(true, lista.contains(medico1));
+        assertNotEquals(true, listaImpostorMedico.contains(medicoImpostor1));
 
     }
 }
+/*
+ *   Author: Hugo Damm
+ *   Date: 29/09/21
+ */
