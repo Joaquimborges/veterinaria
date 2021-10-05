@@ -19,4 +19,11 @@
   "endereco" : "Rua 2",
   "telefoneContato" : "91276338902",
   "dataDeNascimento" : [ 2021, 9, 25 ]
+}, {
+  "nome" : "Hugo",
+  "sobrenome" : "Sousa",
+  "cpf" : "5577889900",
+  "endereco" : "rua 1",
+  "telefoneContato" : "1190884625",
+  "dataDeNascimento" : [ 1993, 9, 15 ]
 } ]

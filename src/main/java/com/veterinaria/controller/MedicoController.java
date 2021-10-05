@@ -42,8 +42,8 @@ public class MedicoController {
         return new ResponseEntity<>(MedicoDTO.converter(medico), HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping(value = "/apagar/{crm}")
-    public ResponseEntity<Boolean> apagar(@PathVariable Integer crm){
-        return new ResponseEntity<>(medicoService.apagar(crm), HttpStatus.OK);
+    @DeleteMapping(value = "/apagar/{crvet}")
+    public ResponseEntity<Boolean> apagar(@PathVariable Integer crvet){
+        return new ResponseEntity<>(medicoService.apagar(crvet), HttpStatus.OK);
     }
 }

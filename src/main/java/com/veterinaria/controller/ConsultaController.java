@@ -27,10 +27,6 @@ public class ConsultaController {
         return consultaService.alterar(consulta);
     }
 
-    @GetMapping(value = "/consultasOrdenadoPorNome/{nomePaciente}/{cpfProprietario}")
-    public List<Consulta> ordenadoPorNomeProprietario(@PathVariable String nomePaciente, @PathVariable String cpfProprietario){
-        return consultaService.consultasPaciente(nomePaciente, cpfProprietario);
-    }
 
     @GetMapping(value = "/consultasOrdenadoPorDataDecrescente/{nomePaciente}/{cpfProprietario}")
     public List<Consulta> ordenadoPorData(@PathVariable String nomePaciente, @PathVariable String cpfProprietario){
@@ -42,8 +38,15 @@ public class ConsultaController {
         return consultaService.totalConsultasMedico(crm);
     }
 
-    @GetMapping(value = "/consultasMesmoDia/{data}/{nomePaciente}/{cpfProprietario}")
-    public List<Consulta> consultasNoMesmoDia(@PathVariable LocalDate data, @PathVariable String nomePaciente, @PathVariable String cpfProprietario){
-        return consultaService.consultasMesmoDia(data, nomePaciente, cpfProprietario);
+    /**
+     * Método criado reccebendo data, nomePaciente, proprietarioCpf, refatorado apenas para recceber data e atendder a requitos
+     * solicitados.
+     * Autor da refatoração Alex Cruz
+     * @param data
+     * @return List<Consulta>
+     */
+    @GetMapping(value = "/consultasMesmoDia/{data}")
+    public List<Consulta> consultasNoMesmoDia(@PathVariable LocalDate data){
+        return consultaService.consultasMesmoDia(data);
     }
 }
