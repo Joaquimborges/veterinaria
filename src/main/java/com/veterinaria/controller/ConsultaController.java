@@ -38,8 +38,15 @@ public class ConsultaController {
         return consultaService.totalConsultasMedico(crm);
     }
 
-    @GetMapping(value = "/consultasMesmoDia/{data}/{nomePaciente}/{cpfProprietario}")
-    public List<Consulta> consultasNoMesmoDia(@PathVariable LocalDate data, @PathVariable String nomePaciente, @PathVariable String cpfProprietario){
-        return consultaService.consultasMesmoDia(data, nomePaciente, cpfProprietario);
+    /**
+     * Método criado reccebendo data, nomePaciente, proprietarioCpf, refatorado apenas para recceber data e atendder a requitos
+     * solicitados.
+     * Autor da refatoração Alex Cruz
+     * @param data
+     * @return List<Consulta>
+     */
+    @GetMapping(value = "/consultasMesmoDia/{data}")
+    public List<Consulta> consultasNoMesmoDia(@PathVariable LocalDate data){
+        return consultaService.consultasMesmoDia(data);
     }
 }
