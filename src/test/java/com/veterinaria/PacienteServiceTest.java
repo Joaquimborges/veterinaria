@@ -126,5 +126,26 @@ public class PacienteServiceTest {
         assertEquals(p.size(), this.listaPaciente.size());
     }
 
+    /**
+     *
+     * Autor Hugo Damm
+     * Data: 04/10/21
+     *
+     */
+    @Test
+    void apagarPaciente(){
+
+        Mockito.when(mockPacientePersistence.remove(Mockito.any(String.class), Mockito.any(String.class))).thenReturn(true);
+        Mockito.when(mockConsultaPersistence.listar()).thenReturn(listaConsulta);
+        Mockito.when(mockPacientePersistence.listarPacientes()).thenReturn(listaPaciente);
+
+        PacienteService pacienteService = new PacienteService(mockPacientePersistence, mockProprietarioPersistence, mockConsultaPersistence);
+
+        pacienteService.apagar(paciente1.getNome(), proprietario.getCpf());
+
+        assertNotEquals(true, listaPaciente.contains(paciente1));
+
+    }
+
 
 }
