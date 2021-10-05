@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MedicoServiceTest {
 
 
+
     MedicoPersistence impostorMedicoPersistence = Mockito.mock(MedicoPersistence.class);
     MedicoService medicoService = new MedicoService(impostorMedicoPersistence);
 
@@ -47,9 +48,11 @@ public class MedicoServiceTest {
     ArrayList<Medico> listaImpostorMedico = new ArrayList<>();
 
 
+
     Medico  medicoImpostor = new Medico("Tsunade", "Senju", "45612334567", 54342, "Cardio");
     Medico  medicoImpostorAlterado = new Medico("Sakura", "Uchiha", "24313345569", 43551, "Animais pequenos");
     Medico  medicoImpostor2 = new Medico("Hugo", "Damm", "24411267680", 43551, "Animais Grandes");
+
 
 
     @Test
@@ -60,18 +63,22 @@ public class MedicoServiceTest {
         Medico medicoCadastrado = medicoService.cadastrar(medicoImpostor);
         Mockito.verify(impostorMedicoPersistence, Mockito.times(1)).cadastrar(medicoImpostor);
 
+
         assertEquals(listaImpostorMedico.contains(medicoImpostor), listaImpostorMedico.contains(medicoImpostor));
 
     };
+
 
 
     @Test
     void getMedico() {
         Mockito.when(impostorMedicoPersistence.cadastrar(Mockito.any(Medico.class))).thenReturn(medicoImpostor);
         Mockito.when(impostorMedicoPersistence.listarMedicos()).thenReturn(listaImpostorMedico);
+
         medicoService.getMedico(medicoImpostor.getNumeroRegistro());
 
         Mockito.verify(impostorMedicoPersistence,Mockito.times(1)).obterUm(medicoImpostor.getNumeroRegistro());
+
 
         assertEquals(medicoImpostor.getNumeroRegistro(),medicoImpostor.getNumeroRegistro());
 
@@ -80,8 +87,10 @@ public class MedicoServiceTest {
 
     @Test
     void alteraMedicoTest(){
+
         Mockito.when(impostorMedicoPersistence.altera(Mockito.any(Medico.class))).thenReturn(medicoImpostorAlterado);
         Mockito.when(impostorMedicoPersistence.listarMedicos()).thenReturn(listaImpostorMedico);
+
 
         listaImpostorMedico.add(medicoImpostorAlterado);
         medicoService.alterar(medicoImpostorAlterado);
@@ -106,11 +115,13 @@ public class MedicoServiceTest {
     }
 
 
+
     @Test
     void apagarMedicoTest(){
         listaImpostorMedico.add(medicoImpostor);
         listaImpostorMedico.add(medicoImpostor2);
         listaImpostorMedico.add(medicoImpostorAlterado);
+
         Mockito.when(impostorMedicoPersistence.remove(Mockito.any(Integer.class))).thenReturn(true);
         Mockito.when(impostorMedicoPersistence.listarMedicos()).thenReturn(listaImpostorMedico);
 
